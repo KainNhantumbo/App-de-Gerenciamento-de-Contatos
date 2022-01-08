@@ -1,0 +1,138 @@
+:root {
+    --darker-color: #162C2D;
+    --dark-grey-color: #6B8790;
+    --blue-cian-color: #356C6E;
+    --dark-color: #000000;
+    --white-color: #fff;
+    --bloody-color: #C2051B;
+    --shadow-color: #d1d1d1;
+    --darker-orange-color: #D75B31;
+    --light-yellow-color: #EBED68;
+    --smoth-green-color: #6A9080;
+}
+
+* {
+    font-family: Montserrat, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    background: linear-gradient(115deg, var(--smoth-green-color) 18%, var(--light-yellow-color) 190%, var(--blue-cian-color) 120%);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 0 .9em;
+}
+
+.logo {
+    padding: 1rem 0;
+    line-height: 2rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #152E37;
+    text-transform: uppercase;
+}
+
+.nav-items {
+    display: flex;
+    justify-content: flex-end;
+    line-height: 2rem;
+}
+
+.nav-item {
+    margin: 1rem .5rem;
+    color: var(--white-color);
+    font-weight: 500;
+    padding: 0px 5px;
+    cursor: pointer;
+}
+
+.nav-item:hover, .nav-search {
+    border-radius: 2px;
+    background-color: var(--white-color);
+    transition: 300ms ease;
+    color: var(--dark-grey-color);
+
+}
+
+.nav-search > input, .nav-search > button {
+    padding: 5px;
+    border-radius: 2px;
+    border-style: none;
+    outline: none;
+}
+
+.nav-search > input::placeholder {
+    padding: 0 5px;
+    color: var(--dark-grey-color);
+    font-weight: 500;
+}
+
+.nav-search > button {
+    background-color: var(--shadow-color);
+}
+
+.nav-search > button:hover {
+    transition: all 200ms ease;
+    background-color: var(--smoth-green-color);
+}
+
+.btn-menu {
+    display: none;
+}
+
+.colored-icons {
+    width: 15px;
+    filter: opacity(0.5);
+}
+
+.uncolored-icons {
+    width: 30px;
+    background-color: none;
+}
+
+@media  screen and (max-width: 685px) {
+    header {
+        display: block;
+    }
+
+    .nav-items {
+        display: block;
+    }
+
+    .nav-item > input {
+        width: 87vw;
+    }
+    
+    .nav-item > buttton {
+        float: left;
+    }
+
+    .btn-menu {
+        display: inline-block;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0 5px;
+        line-height: 2rem;
+        outline: none;
+    }
+    
+    .hide-menu {
+        display: none;
+        transition: all 1s ease;
+    }
+
+    .btn-menu:hover {
+        background-color: var(--white-color);
+        opacity: 0.5;
+        border-radius: 2px;
+        transition: all .4s easee;
+    }
+}
+
