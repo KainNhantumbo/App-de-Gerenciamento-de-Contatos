@@ -1,6 +1,7 @@
 :root {
     --darker-color: #162C2D;
     --dark-grey-color: #6B8790;
+    --light-grey-color: #F5F6F7;
     --blue-cian-color: #356C6E;
     --dark-color: #000000;
     --white-color: #fff;
@@ -9,10 +10,11 @@
     --darker-orange-color: #D75B31;
     --light-yellow-color: #EBED68;
     --smoth-green-color: #6A9080;
+    --shadows-config: 0 0 2px 2px var(--shadow-color);
 }
 
 * {
-    font-family: Montserrat, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Montserrat, sans-serif;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -27,15 +29,26 @@ header {
     top: 0;
     width: 100%;
     padding: 0 .9em;
+    box-shadow: 0 0 5px 2px var(--shadow-color);
+    z-index: 10;
 }
 
 .logo {
+    display: inline-block;
     padding: 1rem 0;
     line-height: 2rem;
     font-size: 1.2rem;
-    font-weight: 700;
-    color: #152E37;
-    text-transform: uppercase;
+    font-weight: 800;
+    color: var(--darker-color);
+    letter-spacing: .1rem;
+    user-select: none;
+}
+
+.logo > img {
+    width: 20px;
+    float: left;
+    margin-top: .5rem;
+    margin-right: .5rem;
 }
 
 .nav-items {
@@ -57,7 +70,6 @@ header {
     background-color: var(--white-color);
     transition: 300ms ease;
     color: var(--dark-grey-color);
-
 }
 
 .nav-search > input, .nav-search > button {
@@ -96,36 +108,152 @@ header {
     background-color: none;
 }
 
-@media  screen and (max-width: 685px) {
+/* ========= main ========== */
+
+main {
+    margin-top: 5em;
+}
+
+.login-modal {
+    display: flex;
+    justify-content: center;
+    margin-top: 25vh;
+    z-index: 8;
+}
+
+.modal-form {
+    display: flex;
+    justify-content: flex-start;
+    flex-flow: column wrap;
+    gap: 1rem;
+    max-width: 70%;
+    border-radius: 3px;
+    padding: 1rem;
+    box-shadow: var(--shadows-config);
+    background-color: var(--white-color);
+    z-index: 9;
+}
+
+.form-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    border-left: 3px solid var(--blue-cian-color);
+    padding-left: .5vw;
+    color: var(--blue-cian-color);
+}
+
+.form-item {
+    max-width: 98%;
+}
+
+.form-text {
+    font-size: .9rem;
+    line-height: 1.8rem;
+}
+
+.form-text > a {
+    color: var(--bloody-color);
+    word-break: break-word;
+}
+
+.modal-form > label {
+    font-weight: 500;
+    margin-top: .5rem;
+    color: var(--darker-color);
+}
+
+.modal-form > input {
+    border-radius: 3px;
+    border-style: none;
+    border: 2px solid var(--blue-cian-color);
+    padding: 5px;
+    outline: none;
+    background-color: var(--light-grey-color);
+}
+
+.modal-form > input[type="radio"] {
+    background-color: red;
+    padding: 10px;
+    border-radius: 4px;
+    
+}
+
+.modal-form > input::placeholder {
+    font-size: .9rem;
+    font-weight: 500;
+}
+
+.btn-entrar {
+    background-color: var(--blue-cian-color);
+    border-style: none;
+    padding: 8px 5px;
+    font-weight: 500;
+    color: var(--white-color);
+}
+
+.btn-entrar:hover {
+    box-shadow: var(--shadows-config);
+    transition: .2s ease;
+}
+
+.btn-entrar:active {
+    outline-color: var(--dark-grey-color);
+}
+
+.btn-quit {
+    float: right;
+    padding: 3px 5px;
+    border-radius: 5px;
+}
+
+.btn-quit:hover {
+    background-color: var(--shadow-color);
+    backdrop-filter: opacity(.5);
+    transition: .3s ease;
+}
+
+.btn-quit > img {
+    width: 10px;
+    float: right;
+}
+
+.hide-items {
+    display: none;
+}
+
+@media  screen and (max-width: 690px) {
     header {
         display: block;
     }
 
+    @keyframes toggleMenu {
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
     .nav-items {
         display: block;
+
+        animation: toggleMenu .5s ease forwards;
+        transform: translateY(-2rem);
+        opacity: 0;
     }
 
     .nav-item > input {
-        width: 87vw;
-    }
-    
-    .nav-item > buttton {
-        float: left;
+        width: calc(98% - 27px);
     }
 
     .btn-menu {
-        display: inline-block;
+        display: block;
         background: none;
         border: none;
         cursor: pointer;
         padding: 0 5px;
-        line-height: 2rem;
         outline: none;
-    }
-    
-    .hide-menu {
-        display: none;
-        transition: all 1s ease;
+        float: right;
+        margin: 1rem;
     }
 
     .btn-menu:hover {
@@ -133,6 +261,10 @@ header {
         opacity: 0.5;
         border-radius: 2px;
         transition: all .4s easee;
+    }
+    
+    .hide-menu {
+        display: none;
     }
 }
 

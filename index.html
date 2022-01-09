@@ -16,16 +16,17 @@
 <body>
     <header>
         <div class="logo">
-            Contact Management App
+            Contacts App
+            <img src="./svgs/user-alt.svg" alt="menu icon">
         </div>
         <button class="btn-menu">
             <img class="uncolored-icons" src="./svgs/ellipsis.svg" alt="menu icon">
         </button>
         <nav class="navigation">
-            
-            <ol class="nav-items">
+            <ol class="nav-items hide-menu">
                 <li class="nav-item">Início</li>
-                <li class="nav-item">Login</li>
+                <li class="nav-item" id="btn-login">Entrar</li>
+                <li class="nav-item" id="btn-cadasdrar">Cadastre-se</li>
                 <li class="nav-item nav-search">
                     <input type="search" placeholder="Procurar..."> 
                     <button>
@@ -33,13 +34,65 @@
                     </button>
                 </li>
             </ol>
-            
         </nav>
-        
-        
     </header>
     <main>
+        <section class="login-modal ">
+            <form class="modal-form hide-items" action="">
+                
+                <div class="form-title form-item">
+                    Entrar
+                    <div class="btn-quit">
+                        <img src="./svgs/xmark.svg" alt="xmark icon">
+                    </div>
+                </div>
+    
+                <label class="form-item" for="email-input">Email</label>
+                <input class="form-item" autocomplete="email" type="email" id="email-input" placeholder="Escreva o seu email" required>
+    
+                <label class="form-item" for="password-input'">Senha</label>
+                <input class="form-item" autocomplete="current-password" type="password" name="" id="password-input" placeholder="Digite a sua senha" required>
 
+                <div class="form-text">
+                    Esqueceu a sua senha? <a href="#">Clique aqui</a> para recuperar a sua conta.
+                </div>
+    
+                <button class="form-item btn-entrar" type="submit">Entrar</button>
+            </form>
+            <form action="" class="modal-form">
+                <div class="form-title form-item">
+                    Cadastre-se
+                    <div class="btn-quit">
+                        <img src="./svgs/xmark.svg" alt="xmark icon">
+                    </div>
+                </div>
+
+                <label for="first-name">Nome</label>
+                <input type="text" id="first-name" placeholder="Escreva o seu nome">
+                
+                <label class="form-item" for="last-name">Sobrenome</label>
+                <input class="form-item" type="text" id="last-name" name="last-name" placeholder="Escreva o sobrenome">
+
+                <label class="form-item" for="phone-number">Telefone</label>
+                <input class="form-item" class="form-item" type="tel" name="phone-number" id="phone-number" placeholder="Escreva o número do telefone" min="0" maxlength="15">
+
+                <label class="form-item" for="birthdate">Data de Nascimento</label>
+                <input class="form-item" type="date" id="birthdate" name="birthdate">
+
+                <label class="form-item" for="gender">Gênero</label>
+
+                <label class="form-item" for="gender-male">Masculino</label>
+
+                <input class="form-item" type="radio" value="Masculino" id="gender-male" name="gender">
+
+                <label class="form-item" for="gender-female">Femenino</label>
+
+                <input class="form-item" type="radio" value="Femenino" id="gender-female" name="gender">
+                
+            </form>
+        </section>
+        
+        
     </main>
     <footer>
 
