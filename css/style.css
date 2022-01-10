@@ -63,6 +63,7 @@ header {
     font-weight: 500;
     padding: 0px 5px;
     cursor: pointer;
+    user-select: none;
 }
 
 .nav-item:hover, .nav-search {
@@ -108,6 +109,20 @@ header {
     background-color: none;
 }
 
+::-webkit-scrollbar {
+    background-color: var(--dark-grey-color);
+    width: .8vw;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--blue-cian-color);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--darker-color);
+}
+
 /* ========= main ========== */
 
 main {
@@ -115,10 +130,8 @@ main {
 }
 
 .login-modal {
-    display: flex;
-    justify-content: center;
-    margin-top: 25vh;
     z-index: 8;
+    position: relative;
 }
 
 .modal-form {
@@ -126,12 +139,16 @@ main {
     justify-content: flex-start;
     flex-flow: column wrap;
     gap: 1rem;
-    max-width: 70%;
+    width: 20em;
     border-radius: 3px;
     padding: 1rem;
     box-shadow: var(--shadows-config);
     background-color: var(--white-color);
     z-index: 9;
+    
+    position: fixed;
+    left: calc(50% - 10em);
+    top: 20vh;
 }
 
 .form-title {
@@ -219,6 +236,24 @@ main {
 
 .hide-items {
     display: none;
+}
+
+/* ==============footer================ */
+footer {
+    position: relative;
+}
+
+.info-footer {
+    background-color: var(--blue-cian-color);
+    color: var(--white-color);
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: .5em;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    margin-top: 2rem;
 }
 
 @media  screen and (max-width: 690px) {

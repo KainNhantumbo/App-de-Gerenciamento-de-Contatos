@@ -1,0 +1,14 @@
+:root {
+    --darker-color: #162C2D;
+    --dark-grey-color: #6B8790;
+    --light-grey-color: #F5F6F7;
+    --blue-cian-color: #356C6E;
+    --dark-color: #000000;
+    --white-color: #fff;
+    --bloody-color: #C2051B;
+    --shadow-color: #d1d1d1;
+    --darker-orange-color: #D75B31;
+    --light-yellow-color: #EBED68;
+    --smoth-green-color: #6A9080;
+    --shadows-config: 0 0 2px 2px var(--shadow-color);
+}
