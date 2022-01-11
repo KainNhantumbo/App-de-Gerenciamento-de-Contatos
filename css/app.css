@@ -11,4 +11,92 @@
     --light-yellow-color: #EBED68;
     --smoth-green-color: #6A9080;
     --shadows-config: 0 0 2px 2px var(--shadow-color);
+    --buttons-gradient-config: linear-gradient(130deg, var(--blue-cian-color) 5%, var(--smoth-green-color) 20%, var(--light-yellow-color) 170%);
+}
+@keyframes onColorSet {
+    from {
+        opacity: 0;
+        background-color: var(--smoth-green-color);
+    }
+}
+
+@keyframes onColorRemove {
+    to {
+        opacity: 1;
+        background-color: initial;
+    }
+}
+
+.--dark-mode {
+    background-color: #162C2D;
+    animation: onColorSet 500ms ease forwards;
+    opacity: 1;
+}
+
+.--dark-modeEnd {
+    animation: onColorRemove 500ms ease forwards;
+    opacity: 1;
+}
+
+.main-container {
+    position: relative;
+    z-index: 0;
+}
+
+.welcome {
+    width: 100%;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: .9rem;
+    text-align: center;
+    color: var(--white-color);
+    line-height: 2rem;
+    background-color: var(--smoth-green-color);
+    z-index: 9;
+    position: fixed;
+    top: 8vh;
+    user-select: none;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: space-around;
+    background-color: #d0d0d0;
+    padding: 5px; 
+    margin: 0 2vw;
+    border-radius: 5px;
+    margin-top: 5vh;
+    
+}
+
+.description{
+    font-weight: 500;
+    color: var(--white-color);
+    margin-top: .2rem;
+}
+
+.btn-dark--mode, .btn-new--contact {
+    padding: 8px;
+    border-style: none;
+    border-radius: 5px;
+    background: var(--buttons-gradient-config);
+    box-shadow: var(--shadows-config);
+    outline: none;
+    display: flex;
+    justify-content: space-evenly;
+    gap: .5em;
+}
+
+.dark-mode:hover, .btn-new-contact:hover {
+    background: var(--dark-grey-color);
+    transition: all 1200ms ease;
+}
+
+.moon-svg, .plus-svg {
+    width: 20px;
+}
+
+.colortest {
+    width: 40px;
+    min-height: 40px;
 }

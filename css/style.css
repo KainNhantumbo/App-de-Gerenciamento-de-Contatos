@@ -124,14 +124,15 @@ header {
 }
 
 /* ========= main ========== */
-
 main {
-    margin-top: 5em;
+    margin-top: 7.9vh;
 }
 
 .login-modal {
     z-index: 8;
-    position: relative;
+    display: flex;
+    justify-content: center;
+    
 }
 
 .modal-form {
@@ -144,11 +145,8 @@ main {
     padding: 1rem;
     box-shadow: var(--shadows-config);
     background-color: var(--white-color);
-    z-index: 9;
-    
-    position: fixed;
-    left: calc(50% - 10em);
-    top: 20vh;
+    margin-top: 15vh;
+    margin-bottom: 15vh;
 }
 
 .form-title {
@@ -188,11 +186,12 @@ main {
     background-color: var(--light-grey-color);
 }
 
-.modal-form > input[type="radio"] {
-    background-color: red;
-    padding: 10px;
-    border-radius: 4px;
-    
+.modal-form > select {
+    background-color:var(--white-color);
+    padding: 5px;
+    border-radius: 3px;
+    border-width: 1px 2px 1px 2px;
+    outline: none;
 }
 
 .modal-form > input::placeholder {
@@ -239,9 +238,7 @@ main {
 }
 
 /* ==============footer================ */
-footer {
-    position: relative;
-}
+
 
 .info-footer {
     background-color: var(--blue-cian-color);
@@ -254,6 +251,7 @@ footer {
     position: fixed;
     bottom: 0;
     margin-top: 2rem;
+    z-index: 10;
 }
 
 @media  screen and (max-width: 690px) {

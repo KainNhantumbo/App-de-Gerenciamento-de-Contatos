@@ -10,10 +10,11 @@
     <link href="./css/lib/reset.css" rel="stylesheet" type="text/css">
     <link href="./css/lib/normalize.css" rel="stylesheet" type="text/css">
     <link href="./css/style.css" rel="stylesheet" type="text/css">
-    <script src="./javascript/script.js" type="text/javascript" defer></script>
+    <link type="text/css" rel="stylesheet" href="./css/app.css">
+    <script src="./javascript/script.js" type="module" defer></script>
     <title>Contacts App</title>
 </head>
-<body>
+<body class="main-class">
     <header>
         <div class="logo">
             Contacts App
@@ -33,12 +34,13 @@
                         <img class="colored-icons" src="./svgs/search.svg" alt="search icon">
                     </button>
                 </li>
+                
             </ol>
         </nav>
     </header>
     <main>
         <section class="login-modal ">
-            <form method="get" class="modal-form hide-items" action="">
+            <form class="modal-form hide-items">
                 
                 <div class="form-title form-item">
                     Entrar
@@ -49,17 +51,16 @@
     
                 <label class="form-item" for="email-input">E-mail</label>
                 <input class="form-item" autocomplete="email" type="email" id="email-input-signin" placeholder="Escreva o seu email" required>
-    
+                
                 <label class="form-item" for="password-input">Senha</label>
                 <input class="form-item" autocomplete="current-password" type="password" name="" id="password-input-signin" placeholder="Digite a sua senha" required>
 
                 <div class="form-text">
                     Esqueceu a sua senha? <a href="#">Clique aqui</a> para recuperar a sua conta.
                 </div>
-    
                 <button class="form-item btn-entrar" type="submit">Entrar</button>
             </form>
-            <form method="get" action="" class="modal-form --register hide-items">
+            <form action="" class="modal-form --register hide-items">
                 <div class="form-title form-item">
                     Cadastre-se
                     <div class="btn-quit">
@@ -99,10 +100,62 @@
                     Já tem uma conta? <a href="#">Clique aqui</a> para entrar.
                 </div>
                 
-                
             </form>
         </section>
-        
+        <article class="main-container">
+            <section class="toolbar">
+                <button class="btn-dark--mode">
+                    <div class="svg-container">
+                        <img class="moon-svg" src="./svgs/moon-regular.svg" alt="dark mode regular">
+                    </div>
+                    <div class="description">
+                        Modo Escuro
+                    </div>
+                </button>
+                <button class="btn-new--contact">
+                    <div class="svg-container">
+                        <img class="plus-svg" src="./svgs/plus.svg" alt="plus icon">
+                    </div>
+                    <div class="description">
+                        Adicionar Contato
+                    </div>
+                </button>
+            </section>
+            <section class="app-body">
+                <div class="contacts-container">
+                    <div class="contacts-header">
+                        <div class="contacts-header--info" id="c-name">
+
+                        </div>
+                        <div class="contacts-header--info" id="c-id">
+
+                        </div>
+                        <div class="contacts-header--info" id="c-notation">
+
+                        </div>
+                        <div class="contacts-header--info" id="actions">
+
+                        </div>
+                    </div>
+                    <div class="contacts-data">
+                        <div class="contact-username">
+
+                        </div>
+                        <div class="contact-number">
+
+                        </div>
+                        <div class="contact-note">
+
+                        </div>
+                        <div class="contact-more">
+                            <button class="btn--display-options">
+                                <img src="./svgs/ellipsis-vertical.svg" alt="more icon">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </article>
         
     </main>
     <footer>
