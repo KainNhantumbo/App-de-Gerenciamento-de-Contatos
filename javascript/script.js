@@ -1,5 +1,35 @@
 import "./app.js";
 
+//animação ao abrir os modais
+const onOpenModalAnimation = () => {
+    const modals = document.querySelectorAll('.modal-form');
+
+    for (let i = 0; modals.length > i; i++) {
+        modals[i].classList.add('--modal-open');
+    }
+
+    setTimeout(() => {
+        for (let i = 0; modals.length > i; i++) {
+            modals[i].classList.remove('--modal-open');
+        }
+    }, 500);
+}
+
+//animação ao fechar os modais
+const onCloseModalAnimation = () => {
+    const modals = document.querySelectorAll('.modal-form');
+
+    for (let i = 0; modals.length > i; i++) {
+        modals[i].classList.add('--modal-close');
+    }
+    
+    setTimeout(() => {
+        for (let i = 0; modals.length > i; i++) {
+            modals[i].classList.remove('--modal-close');
+        }
+    }, 500);
+}
+
 //mostra ou oculta o menu
 const toogleMenu = () => {
     document.querySelector('.nav-items').classList.toggle('hide-menu');
@@ -7,21 +37,39 @@ const toogleMenu = () => {
 
 //mostra ou oculta o modal de login
  const login = () => {
-    document.querySelector('.modal-form').classList.toggle('hide-items');
+    document.querySelector('.login-modal').classList.toggle('hide-items');
+    document.querySelector('.--login').classList.remove('hide-items');
     document.querySelector('.--register').classList.add('hide-items');
+    onOpenModalAnimation();
     toogleMenu();
 }
 
+//mostra ou oculta o modal de cadastro
 const register = () => {
+    document.querySelector('.login-modal').classList.toggle('hide-items');
     document.querySelector('.--register').classList.toggle('hide-items');
-    document.querySelector('.modal-form').classList.add('hide-items');
+    document.querySelector('.--login').classList.add('hide-items');
+    document.querySelector('.add-contact').classList.add('hide-items');
+    onOpenModalAnimation();
     toogleMenu();
 }
 
-//remove o modal de login
+const addContact = () => {
+    document.querySelector('.login-modal').classList.toggle('hide-items');
+    document.querySelector('.--login').classList.add('hide-items');
+    document.querySelector('.add-contact').classList.toggle('hide-items');
+    onOpenModalAnimation();
+}
+
+//remove o modal
 const quitModal = () => {
-    document.querySelector('.modal-form').classList.add('hide-items');
-    document.querySelector('.--register').classList.add('hide-items');
+    onCloseModalAnimation();
+
+    setTimeout(() => {
+        document.querySelector('.login-modal').classList.add('hide-items');
+        document.querySelector('.--register').classList.add('hide-items');
+        document.querySelector('.add-contact').classList.add('hide-items');
+    }, 500);
 }
 
 //login do usuário com os dados salvos no navegador
@@ -107,11 +155,17 @@ const setToLocalStorage = ($userData) => {
 
 // carrega os eventos
 function loadEvents () {
-    document.querySelectorAll('.btn-quit').item(0).addEventListener('click', quitModal);
-    document.querySelectorAll('.btn-quit').item(1).addEventListener('click', quitModal);
+    const btnsQuit = document.querySelectorAll('.btn-quit');
+    for (let i = 0; btnsQuit.length > i; i++) {
+        btnsQuit[i].addEventListener('click', quitModal);
+    }
+
     document.querySelector('#btn-login').addEventListener('click', login);
     document.querySelector('.btn-menu').addEventListener('click', toogleMenu);
     document.querySelector('#btn-register').addEventListener('click', register);
+    document.querySelector('.btn-new--contact').addEventListener('click', addContact);
+    /* document.querySelector('.login-modal').addEventListener('click', quitModal); */
+    
     btnEntrar.addEventListener('click', userLogin);
     btnSignup.addEventListener('click', userSignup);
 }

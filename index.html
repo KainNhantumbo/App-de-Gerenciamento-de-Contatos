@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Kain Nhantumbo">
-    <meta name="description" content="Contacts management application">
+    <meta name="description" content="Contacts management application (SPA type)">
     <link href="./svgs/address-book.svg" type="icon" rel="icon">
     <link href="./css/lib/reset.css" rel="stylesheet" type="text/css">
     <link href="./css/lib/normalize.css" rel="stylesheet" type="text/css">
@@ -39,8 +39,8 @@
         </nav>
     </header>
     <main>
-        <section class="login-modal ">
-            <form class="modal-form hide-items">
+        <section class="login-modal hide-items">
+            <form class="modal-form --login">
                 
                 <div class="form-title form-item">
                     Entrar
@@ -58,7 +58,10 @@
                 <div class="form-text">
                     Esqueceu a sua senha? <a href="#">Clique aqui</a> para recuperar a sua conta.
                 </div>
-                <button class="form-item btn-entrar" type="submit">Entrar</button>
+
+                <button class="form-item btn-entrar" type="submit">
+                    Entrar
+                </button>
             </form>
             <form action="" class="modal-form --register hide-items">
                 <div class="form-title form-item">
@@ -72,7 +75,7 @@
                 <input class="form-item" type="text" id="first-name" placeholder="Escreva o seu nome" required>
                 
                 <label class="form-item" for="last-name">Sobrenome</label>
-                <input class="form-item" type="text" id="last-name" name="last-name" placeholder="Escreva o sobrenome" required>
+                <input class="form-item" type="text" id="last-name" name="last-name" placeholder="Escreva o seu sobrenome" required>
 
                 <label class="form-item" for="phone-number">Telefone</label>
                 <input class="form-item" class="form-item" type="tel" name="phone-number" id="phone-number" placeholder="Escreva o número do telefone" min="0" maxlength="15" required>
@@ -94,13 +97,59 @@
                     <option value="Femenino">Femenino</option>
                 </select>
 
-                <button class="form-item btn-entrar" type="submit" id="btn-signup">Cadastre-se</button>
+                <button class="form-item btn-signup" type="submit" id="btn-signup">Cadastre-se</button>
 
                 <div class="form-text">
                     Já tem uma conta? <a href="#">Clique aqui</a> para entrar.
                 </div>
-                
             </form>
+            <form class="modal-form add-contact hide-items">
+                <div class="form-title form-item">
+                    Adicionar Contato
+                    <div class="btn-quit">
+                        <img src="./svgs/xmark.svg" alt="xmark icon">
+                    </div>
+                </div>
+
+                <label class="form-item" for="contact-name">
+                    Nome do Contato
+                </label>
+                <input class="form-item" name="contact-name" type="text" placeholder="Nome do contato..." id="contact-name">
+                
+                <label class="form-item" for="contact-number">
+                    Número de Telefone
+                </label>
+                <input class="form-item" type="tel" name="contact-number" placeholder="Número de telefone..." id="contact-number">
+
+                <label class="form-item" for="contact-note">
+                    Anotações
+                </label>
+                <input class="form-item" type="text" placeholder="Escreva uma nota" name="contact-note" id="contact-note">
+
+                <label class="form-item" for="contact-email">
+                    E-mail
+                </label>
+                <input class="form-item"  type="email" name="contact-email" placeholder="Escreva o e-mail..." autocomplete="contact-name" id="contact-email">
+
+                <label class="form-item" for="contact-adress">
+                    Morada
+                </label>
+                <input class="form-item" type="text" name="contact" placeholder="Morada do contato..." id="contact-adress">
+
+                <div class="btns-container">
+                    <button class="form-item btn-save--contact" type="submit">
+                        Salvar
+                    </button>
+                    <button class="form-item btn-cancel--contact">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+            <div class="submit-contact--container">
+                <div class="submit-contact-modal">
+
+                </div>
+            </div>
         </section>
         <article class="main-container">
             <section class="toolbar">
@@ -124,36 +173,41 @@
             <section class="app-body">
                 <div class="contacts-container">
                     <div class="contacts-header">
-                        <div class="contacts-header--info" id="c-name">
-
+                        <div class="contacts-header--info" id="header-name">
+                            Nome
                         </div>
-                        <div class="contacts-header--info" id="c-id">
-
+                        <div class="contacts-header--info" id="header-id">
+                            Número de Telefone
                         </div>
-                        <div class="contacts-header--info" id="c-notation">
-
+                        <div class="contacts-header--info" id="header-notation">
+                            Anotações
                         </div>
-                        <div class="contacts-header--info" id="actions">
-
-                        </div>
-                    </div>
-                    <div class="contacts-data">
-                        <div class="contact-username">
-
-                        </div>
-                        <div class="contact-number">
-
-                        </div>
-                        <div class="contact-note">
-
-                        </div>
-                        <div class="contact-more">
-                            <button class="btn--display-options">
-                                <img src="./svgs/ellipsis-vertical.svg" alt="more icon">
-                            </button>
+                        <div class="contacts-header--info" id="header-actions">
+                            Opções
                         </div>
                     </div>
                 </div>
+
+                <section class="saved-contacts--container">
+                   <template>
+                        <div class="contacts-data">
+                            <div class="contact-item contact-name">
+
+                            </div>
+                            <div class="contact-item contact-phone">
+
+                            </div>
+                            <div class="contact-item contact-note">
+
+                            </div>
+                            <div class="contact-item contact-more">
+                                <button class="btn--display-options">
+                                    <img src="./svgs/ellipsis.svg" alt="more icon">
+                                </button>
+                            </div>
+                        </div>
+                   </template>
+                </section>
             </section>
         </article>
         

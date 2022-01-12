@@ -1,5 +1,6 @@
 :root {
     --darker-color: #162C2D;
+    --darker-grey-color: rgba(0,0,0,.2);
     --dark-grey-color: #6B8790;
     --light-grey-color: #F5F6F7;
     --blue-cian-color: #356C6E;
@@ -13,6 +14,9 @@
     --shadows-config: 0 0 2px 2px var(--shadow-color);
     --buttons-gradient-config: linear-gradient(130deg, var(--blue-cian-color) 5%, var(--smoth-green-color) 20%, var(--light-yellow-color) 170%);
 }
+
+/*================animetions================*/
+
 @keyframes onColorSet {
     from {
         opacity: 0;
@@ -27,6 +31,48 @@
     }
 }
 
+@keyframes onModalClose {
+    from {
+        transform: translateY(initial);
+        opacity: 1;
+    }
+
+    20% {
+        transform: translateY(-5vh);
+    }
+    
+    100%{
+        transform: translateY(40vh);
+        opacity: 0;
+    }
+}
+
+@keyframes onModalOpen {
+    from {
+        transform: translateY(40vh);
+        opacity: 0;
+    }
+
+    80% {
+        transform: translateY(-5vh);
+    }
+    
+    100%{
+        transform: translateY(initial);
+        opacity: 1;
+    }
+}
+
+.--modal-open {
+    animation: onModalOpen 500ms ease forwards;
+}
+
+.--modal-close {
+    animation: onModalClose 500ms ease forwards;
+}
+
+
+
 .--dark-mode {
     background-color: #162C2D;
     animation: onColorSet 500ms ease forwards;
@@ -37,6 +83,9 @@
     animation: onColorRemove 500ms ease forwards;
     opacity: 1;
 }
+
+
+/*================animetionend================*/
 
 .main-container {
     position: relative;
@@ -66,8 +115,8 @@
     margin: 0 2vw;
     border-radius: 5px;
     margin-top: 5vh;
-    
 }
+
 
 .description{
     font-weight: 500;
@@ -75,7 +124,7 @@
     margin-top: .2rem;
 }
 
-.btn-dark--mode, .btn-new--contact {
+.btn-dark--mode, .btn-new--contact, .btn--display-options {
     padding: 8px;
     border-style: none;
     border-radius: 5px;
@@ -87,7 +136,20 @@
     gap: .5em;
 }
 
-.dark-mode:hover, .btn-new-contact:hover {
+.btn--display-options {
+    box-shadow: none;
+    background: none;
+    padding: 5px 10px;
+    margin: 0 auto;
+}
+
+.btn--display-options:hover {
+    background: rgba(255, 255, 255, .2);
+    transition: all 400ms ease;
+}
+
+.btn-dark--mode:hover,
+.btn-new--contact:hover {
     background: var(--dark-grey-color);
     transition: all 1200ms ease;
 }
@@ -96,7 +158,67 @@
     width: 20px;
 }
 
-.colortest {
-    width: 40px;
-    min-height: 40px;
+.more-svg {
+    width: 5px;
+}
+
+.app-body {
+    background-color: #d0d0d0;
+    margin: 0 2vw;
+    padding: .5em 0;
+    margin-top: 2vh;
+    border-radius: 5px;
+}
+
+.contacts-header, .contacts-data {
+    display: flex;
+    justify-content: space-evenly;
+    flex-flow: row nowrap;
+    width: 94vw;
+    margin: 0 auto;
+    padding: 2px;
+    border-radius: 5px;
+    background: var(--smoth-green-color);
+}
+
+.contacts-data {
+    display: flex;
+    justify-content: space-around;
+    flex-flow: row nowrap;
+    gap: 0;
+    padding: 0 .2em;
+    margin-top: .5vh;
+}
+
+.contacts-header--info, .contact-item {
+    margin: 1vh 0;
+    padding: 15px 5%;
+    background: var(--darker-color);
+    border-radius: 5px;
+    color: var(--white-color);
+    font-weight: 500;
+    font-size: 1.1rem;
+    user-select: none;
+}
+
+.contact-item {
+    padding: .5em;
+    line-height: 1.8rem;
+    width: 25%;
+    text-align: center;
+    border-radius: 0;
+    font-weight: 400;
+    line-break: loose;
+}
+
+.contact-more {
+    border-radius: 0 5px 5px 0;
+}
+
+.contact-name {
+    border-radius: 5px 0 0 5px;
+}
+
+.--dark-background {
+    background-color: var(--darker-grey-color);
 }
