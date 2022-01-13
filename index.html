@@ -11,7 +11,7 @@
     <link href="./css/lib/normalize.css" rel="stylesheet" type="text/css">
     <link href="./css/style.css" rel="stylesheet" type="text/css">
     <link type="text/css" rel="stylesheet" href="./css/app.css">
-    <script src="./javascript/script.js" type="module" defer></script>
+    <script src="./javascript/app.js" type="module" defer></script>
     <title>Contacts App</title>
 </head>
 <body class="main-class">
@@ -97,13 +97,11 @@
                     <option value="Femenino">Femenino</option>
                 </select>
 
-                <button class="form-item btn-signup" type="submit" id="btn-signup">Cadastre-se</button>
-
-                <div class="form-text">
-                    Já tem uma conta? <a href="#">Clique aqui</a> para entrar.
-                </div>
+                <button class="form-item btn-signup" type="submit" id="btn-signup">
+                    Cadastre-se
+                </button>
             </form>
-            <form class="modal-form add-contact hide-items">
+            <div class="modal-form add-contact hide-items">
                 <div class="form-title form-item">
                     Adicionar Contato
                     <div class="btn-quit">
@@ -143,11 +141,6 @@
                     <button class="form-item btn-cancel--contact">
                         Cancelar
                     </button>
-                </div>
-            </form>
-            <div class="submit-contact--container">
-                <div class="submit-contact-modal">
-
                 </div>
             </div>
         </section>
