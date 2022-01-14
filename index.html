@@ -39,8 +39,10 @@
         </nav>
     </header>
     <main>
+        <!--------------- Modals ------------------->
+        <!--------------- Login Modal ------------------->
         <section class="login-modal hide-items">
-            <form class="modal-form --login">
+            <div class="modal-form --login">
                 
                 <div class="form-title form-item">
                     Entrar
@@ -62,8 +64,10 @@
                 <button class="form-item btn-entrar" type="submit">
                     Entrar
                 </button>
-            </form>
-            <form action="" class="modal-form --register hide-items">
+            </div>
+
+            <!------------- Sign in Modal --------------->
+            <div class="modal-form --register hide-items">
                 <div class="form-title form-item">
                     Cadastre-se
                     <div class="btn-quit">
@@ -100,7 +104,9 @@
                 <button class="form-item btn-signup" type="submit" id="btn-signup">
                     Cadastre-se
                 </button>
-            </form>
+            </div>
+
+             <!----------- Add Contact Modal ------------->
             <div class="modal-form add-contact hide-items">
                 <div class="form-title form-item">
                     Adicionar Contato
@@ -112,27 +118,27 @@
                 <label class="form-item" for="contact-name">
                     Nome do Contato
                 </label>
-                <input class="form-item" name="contact-name" type="text" placeholder="Nome do contato..." id="contact-name">
+                <input class="form-item --item" name="contact-name" type="text" placeholder="Nome do contato..." id="contact-name">
                 
                 <label class="form-item" for="contact-number">
                     Número de Telefone
                 </label>
-                <input class="form-item" type="tel" name="contact-number" placeholder="Número de telefone..." id="contact-number">
+                <input class="form-item --item" type="tel" name="contact-number" placeholder="Número de telefone..." id="contact-number">
 
                 <label class="form-item" for="contact-note">
                     Anotações
                 </label>
-                <input class="form-item" type="text" placeholder="Escreva uma nota" name="contact-note" id="contact-note">
+                <input class="form-item --item" type="text" placeholder="Escreva uma nota" name="contact-note" id="contact-note">
 
                 <label class="form-item" for="contact-email">
                     E-mail
                 </label>
-                <input class="form-item"  type="email" name="contact-email" placeholder="Escreva o e-mail..." autocomplete="contact-name" id="contact-email">
+                <input class="form-item --item"  type="email" name="contact-email" placeholder="Escreva o e-mail..." autocomplete="contact-name" id="contact-email">
 
                 <label class="form-item" for="contact-adress">
                     Morada
                 </label>
-                <input class="form-item" type="text" name="contact" placeholder="Morada do contato..." id="contact-adress">
+                <input class="form-item --item" type="text" name="contact" placeholder="Morada do contato..." id="contact-adress">
 
                 <div class="btns-container">
                     <button class="form-item btn-save--contact" type="submit">
@@ -144,6 +150,8 @@
                 </div>
             </div>
         </section>
+
+         <!------------- Main App --------------->
         <article class="main-container">
             <section class="toolbar">
                 <button class="btn-dark--mode">
@@ -164,6 +172,8 @@
                 </button>
             </section>
             <section class="app-body">
+
+                 <!---------- Contacts header --------->
                 <div class="contacts-container">
                     <div class="contacts-header">
                         <div class="contacts-header--info" id="header-name">
@@ -181,6 +191,7 @@
                     </div>
                 </div>
 
+                 <!------------- Contacts --------------->
                 <section class="saved-contacts--container">
                    <template>
                         <div class="contacts-data">
@@ -195,6 +206,18 @@
                             </div>
                             <div class="contact-item contact-more">
                                 <button class="btn--display-options">
+                                    <div class="options-modal--container">
+                                        <div class="options-modal">
+                                            <button class="btn-details">
+                                                Detalhes
+                                                <img class="chvronr-svg" src="./svgs/chevron-right.svg" alt="arrow left">
+                                            </button>
+                                            <button class="btn-delete">
+                                                Deletar
+                                                <img class="chvronr-svg" src="./svgs/chevron-right.svg" alt="arrow left">
+                                            </button>
+                                        </div>
+                                    </div>
                                     <img src="./svgs/ellipsis.svg" alt="more icon">
                                 </button>
                             </div>
@@ -207,7 +230,7 @@
     </main>
     <footer>
         <div class="info-footer">
-           &copy; 2022 Contacts Management System. <br> All rights reserved.
+           &copy; 2022 Kain Nhantumbo - Contacts App. <br> All rights reserved.
         </div>
     </footer>
 </body>

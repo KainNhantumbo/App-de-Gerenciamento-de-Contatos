@@ -36,11 +36,9 @@
         transform: translateY(initial);
         opacity: 1;
     }
-
     20% {
         transform: translateY(-5vh);
     }
-    
     100%{
         transform: translateY(40vh);
         opacity: 0;
@@ -52,15 +50,47 @@
         transform: translateY(40vh);
         opacity: 0;
     }
-
     80% {
         transform: translateY(-5vh);
-    }
-    
+    } 
     100%{
         transform: translateY(initial);
         opacity: 1;
     }
+}
+
+@keyframes onOpenOptions {
+    from {
+        opacity: 0;
+        transform: translateX(-5em);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes hoverOnButtons {
+    0% {
+        transform: translateX(1vw);
+    }
+    25% {
+        transform: translateX(0vw);
+    }
+    50% {
+        transform: translateX(1vw);
+    }
+    75% {
+        transform: translateX(0vw);
+    }
+    100% {
+        transform: translateX(1vw);
+    }
+
+}
+
+.--options-open {
+    animation: onOpenOptions 200ms ease-out forwards;
 }
 
 .--modal-open {
@@ -70,8 +100,6 @@
 .--modal-close {
     animation: onModalClose 500ms ease forwards;
 }
-
-
 
 .--dark-mode {
     background-color: #162C2D;
@@ -89,6 +117,7 @@
 
 .main-container {
     position: relative;
+    margin-bottom: 10vh;
     z-index: 0;
 }
 
@@ -103,7 +132,7 @@
     background-color: var(--smoth-green-color);
     z-index: 9;
     position: fixed;
-    top: 8vh;
+    top: 9vh;
     user-select: none;
 }
 
@@ -141,6 +170,7 @@
     background: none;
     padding: 5px 10px;
     margin: 0 auto;
+    position: relative;
 }
 
 .btn--display-options:hover {
@@ -160,6 +190,13 @@
 
 .more-svg {
     width: 5px;
+}
+.chvronr-svg{
+    width: 12px;
+    position: absolute;
+    top: .5vw;
+    right: 2vw;
+    animation: hoverOnButtons ease 3200ms infinite;
 }
 
 .app-body {
@@ -222,3 +259,49 @@
 .--dark-background {
     background-color: var(--darker-grey-color);
 }
+
+.options-modal--container {
+    width: 20vw;
+    position: absolute;
+    top: 0vh;
+    right: -10vw;
+    z-index: 5000;
+    background-color: rgba(0,0,0,.1);
+}
+
+.options-modal {
+    width: 12vw;
+    box-shadow: 0 0 0 rgba(0,0,0,.2);
+    border-radius: 5px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.btn-details, .btn-delete {
+    width: 100%;
+    padding: 0 8px;
+    position: relative;
+    border-style: none;
+    line-height: 2rem;
+    text-align: left;
+    background-color: var(--dark-grey-color);
+    color: var(--white-color);
+}
+
+.btn-details:hover, .btn-delete:hover {
+    background-color: var(--dark-color);
+}
+
+.btn-details:active, .btn-delete:active {
+    outline: none;
+}
+
+.btn-delete {
+    border-radius: 0 0 5px 5px;
+}
+
+.btn-details {
+    border-radius: 5px 5px 0 0;
+}
+

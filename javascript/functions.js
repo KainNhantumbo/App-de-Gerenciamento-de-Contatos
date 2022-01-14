@@ -1,21 +1,23 @@
 import { onCloseModalAnimation } from "./animations.js";
 
 // salva os dados no localStorage
-export const setDataToStorage = (chave, item) => {
-    localStorage.setItem(chave, JSON.stringify(item));
+export const setDataToStorage = (key, data) => {
+    localStorage.setItem(key, JSON.stringify(data));
 }
 
 //carrega os dados do localStorage
-export const getDataFromStorage = (chave) => {
-    const data = JSON.parse(localStorage.getItem(chave));
+export const getDataFromStorage = (key) => {
+    const data = JSON.parse(localStorage.getItem(key));
     rendererContacts(data);
 }
 
-export const rendererRefresh = (chave) => {
+// atualiza a tela ao modificar os contatos
+export const rendererRefresh = (key) => {
     rendererClear();
-    getDataFromStorage(chave);
+    getDataFromStorage(key);
 }
 
+//limpa a tela antes da atualização dos contatos
 export const rendererClear = () => {
     const contactsContainer = document.querySelector('.saved-contacts--container');
 
@@ -29,7 +31,8 @@ export const rendererContacts = (data) => {
     if (data !== null) {
         data.forEach((item, index) => constructContacts(item.name, item.phone, item.note, index));
     } else {
-        console.log('Sem nada a mostar na tela.');
+        data = [];
+        console.log('Sem nada para mostar na tela.');
     }
 }
 
@@ -42,8 +45,34 @@ export const colorRandomizer = () => {
     const color = r+','+g+','+b+','+a;
 }
 
+// muda para modo noturno e vice-versa
+export const darkmode = () => {
+    const body = document.querySelector('.main-class');
+    const toolbar = document.querySelector('.toolbar');
+    const appBody = document.querySelector('.app-body');
+    const btnDarkmode = document.querySelector('.svg-container');
+    const darkMoonRegular = ` <img class="moon-svg" src="./svgs/moon-regular.svg" alt="dark mode regular">`;
+    const darkMoonSolid = `<img class="moon-svg" src="./svgs/moon-solid.svg" alt="dark mode solid">`;
+
+    if (btnDarkmode.innerHTML === darkMoonRegular) {
+        btnDarkmode.innerHTML = darkMoonSolid;
+        body.classList.add('--dark-mode');
+        toolbar.classList.add('--dark-background');
+        appBody.classList.add('--dark-background');
+    } else {
+        body.classList.add('--dark-modeEnd');
+        setTimeout(() => {
+            btnDarkmode.innerHTML = darkMoonRegular;
+            body.classList.remove('--dark-modeEnd');
+            body.classList.remove('--dark-mode');
+            toolbar.classList.remove('--dark-background');
+            appBody.classList.remove('--dark-background');
+        }, 500)
+    }
+}
+
 //mostra ou oculta o menu
-export const toogleMenu = () => {
+export const toggleMenu = () => {
     document.querySelector('.nav-items').classList.toggle('hide-menu');
 }
 
@@ -58,7 +87,7 @@ export const quitModal = () => {
     }, 500);
 }
 
-//construtor funtion: constroi a interface para
+//construtor function: constroi a interface para
 // os contactos
 export const constructContacts = (name, phone, note, index) => {
     const container = document.querySelector('.saved-contacts--container');
@@ -100,4 +129,90 @@ export const constructContacts = (name, phone, note, index) => {
     imgContact.alt = 'more-icon';
     imgContact.src = './svgs/ellipsis-vertical.svg';
     btnContact_more.append(imgContact);
+
+    constructOptionButtons(btnContact_more);
+}
+
+// constroi botões de opções para cada contacto
+const constructOptionButtons = (contactMore) => {
+    const divContainer = document.createElement('div');
+    const divOptions = document.createElement('div');
+    const btnDetails = document.createElement('button');
+    const btnDelete = document.createElement('button');
+    const svgImg1 = document.createElement('img');
+    var svgImg2 = document.createElement('img');
+
+    divContainer.classList.add("options-modal--container");
+    contactMore.append(divContainer);
+
+    divOptions.classList.add("options-modal");
+    divContainer.append(divOptions);
+
+    btnDetails.classList.add("btn-details");
+    btnDetails.textContent = 'Detalhes';
+    divOptions.append(btnDetails);
+
+    btnDelete.classList.add("btn-delete");
+    btnDelete.textContent = 'Deletar';
+    divOptions.append(btnDelete);
+
+    svgImg1.classList.add("chvronr-svg");
+    svgImg1.src = "./svgs/chevron-right.svg";
+    svgImg1.alt = "arrow left";
+    btnDetails.append(svgImg1);
+
+    svgImg2.classList.add("chvronr-svg");
+    svgImg2.src = "./svgs/chevron-right.svg";
+    svgImg2.alt = "arrow left";
+    btnDelete.append(svgImg2);
+}
+
+//cadastro do usuário
+export const userSignup = () => {
+    const emailSignup = document.getElementById('email-input-signup').value;
+    const password = document.querySelector('#password-input-signup').value;
+    const firstName = document.getElementById('first-name').value;
+    const lastName = document.getElementById('last-name').value;
+    const phoneNumber = document.getElementById('phone-number').value;
+    const birthdate = document.getElementById('birthdate').value;
+    const gender = document.getElementById('gender').value;
+    const setupTime = new Date();
+
+    const $userData = {
+        firstName: firstName,
+        lastName: lastName,
+        username: firstName + ' ' + lastName,
+        birthdate: birthdate,
+        gender: gender,
+        phoneNumber: phoneNumber,
+        email: emailSignup,
+        password: password,
+        signedUpAt: setupTime
+    }
+    setDataToStorage("user", $userData);
+    quitModal();
+}
+
+// constroi uma div para mensagens de erro
+export const divMsg = (msg) => {
+    const formBox = document.querySelectorAll('.modal-form');; 
+
+    for (let i = 0; i < formBox.length; i++) {
+        const div = document.createElement('div');
+
+        div.classList.add('form-item');
+        div.style.border = '2px'+' '+'solid'+' '+'tomato';
+        div.style.padding = '5px';
+        div.style.color = '#fff';
+        div.style.backgroundColor = 'tomato';
+        div.style.fontSize = '.95rem';
+        div.style.textAlign = 'center';
+        div.style.borderRadius = '5px';
+        div.textContent = msg;
+        formBox[i].append(div);
+
+        setTimeout(() => {
+            formBox[i].removeChild(div);
+        }, 2000);
+    }
 }

@@ -111,17 +111,17 @@ header {
 }
 
 ::-webkit-scrollbar {
-    background-color: var(--dark-grey-color);
+    background-color: var(--dark-color);
     width: .8vw;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: var(--blue-cian-color);
+    background-color: rgba(255, 255, 255, .8);
     border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color: var(--darker-color);
+    background-color: rgba(255, 255, 255, .5);
 }
 
 /* ========= main ========== */
