@@ -27,3 +27,8 @@ export const addContactModal = () => {
     document.querySelector('.add-contact').classList.toggle('hide-items');
     onOpenModalAnimation();
 }
+
+//mostra ou oculta o modal de opções de contato
+export const openOptionsModal = () => {
+    document.querySelector('.options-modal--container').classList.toggle('hide-items');  
+}

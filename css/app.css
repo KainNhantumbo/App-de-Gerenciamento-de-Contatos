@@ -72,19 +72,19 @@
 
 @keyframes hoverOnButtons {
     0% {
-        transform: translateX(1vw);
+        transform: translateX(1.5vw);
     }
     25% {
-        transform: translateX(0vw);
+        transform: translateX(.8vw);
     }
     50% {
-        transform: translateX(1vw);
+        transform: translateX(1.5vw);
     }
     75% {
-        transform: translateX(0vw);
+        transform: translateX(.8vw);
     }
     100% {
-        transform: translateX(1vw);
+        transform: translateX(1.5vw);
     }
 
 }
@@ -158,7 +158,7 @@
     border-style: none;
     border-radius: 5px;
     background: var(--buttons-gradient-config);
-    box-shadow: var(--shadows-config);
+    box-shadow: 0 0 5px 1px rgba(0, 0, 0, .2);
     outline: none;
     display: flex;
     justify-content: space-evenly;
@@ -181,7 +181,7 @@
 .btn-dark--mode:hover,
 .btn-new--contact:hover {
     background: var(--dark-grey-color);
-    transition: all 1200ms ease;
+    transition: all 900ms ease;
 }
 
 .moon-svg, .plus-svg {
@@ -192,9 +192,9 @@
     width: 5px;
 }
 .chvronr-svg{
-    width: 12px;
+    width: 8px;
     position: absolute;
-    top: .5vw;
+    top: 12px;
     right: 2vw;
     animation: hoverOnButtons ease 3200ms infinite;
 }
@@ -263,10 +263,10 @@
 .options-modal--container {
     width: 20vw;
     position: absolute;
-    top: 0vh;
-    right: -10vw;
+    top: -1.6vh;
+    right: -5vw;
     z-index: 5000;
-    background-color: rgba(0,0,0,.1);
+    background: none;
 }
 
 .options-modal {
@@ -280,7 +280,7 @@
 
 .btn-details, .btn-delete {
     width: 100%;
-    padding: 0 8px;
+    padding: 0 5px;
     position: relative;
     border-style: none;
     line-height: 2rem;

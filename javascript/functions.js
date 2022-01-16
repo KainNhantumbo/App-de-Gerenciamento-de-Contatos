@@ -41,12 +41,12 @@ export const colorRandomizer = () => {
     var r = Math.floor(Math.random()*255);
     var g = Math.floor(Math.random()*255);
     var b = Math.floor(Math.random()*255);
-    var a = Math.round((Math.random()*1));
-    const color = r+','+g+','+b+','+a;
+    const color = r+','+g+','+b;
+    return color;
 }
 
 // muda para modo noturno e vice-versa
-export const darkmode = () => {
+export const darkMode = () => {
     const body = document.querySelector('.main-class');
     const toolbar = document.querySelector('.toolbar');
     const appBody = document.querySelector('.app-body');
@@ -54,20 +54,26 @@ export const darkmode = () => {
     const darkMoonRegular = ` <img class="moon-svg" src="./svgs/moon-regular.svg" alt="dark mode regular">`;
     const darkMoonSolid = `<img class="moon-svg" src="./svgs/moon-solid.svg" alt="dark mode solid">`;
 
-    if (btnDarkmode.innerHTML === darkMoonRegular) {
-        btnDarkmode.innerHTML = darkMoonSolid;
-        body.classList.add('--dark-mode');
-        toolbar.classList.add('--dark-background');
-        appBody.classList.add('--dark-background');
-    } else {
-        body.classList.add('--dark-modeEnd');
-        setTimeout(() => {
+    switch (btnDarkmode.innerHTML) {
+        case darkMoonRegular:
+            btnDarkmode.innerHTML = darkMoonSolid;
+            body.classList.add('--dark-mode');
+            toolbar.classList.add('--dark-background');
+            appBody.classList.add('--dark-background');
+        break;
+        case darkMoonSolid:
+            body.classList.add('--dark-modeEnd');
+            setTimeout(() => {
+                btnDarkmode.innerHTML = darkMoonRegular;
+                body.classList.remove('--dark-modeEnd');
+                body.classList.remove('--dark-mode');
+                toolbar.classList.remove('--dark-background');
+                appBody.classList.remove('--dark-background');
+            }, 500);
+        break;
+        default:
             btnDarkmode.innerHTML = darkMoonRegular;
-            body.classList.remove('--dark-modeEnd');
-            body.classList.remove('--dark-mode');
-            toolbar.classList.remove('--dark-background');
-            appBody.classList.remove('--dark-background');
-        }, 500)
+        break;
     }
 }
 
@@ -80,11 +86,16 @@ export const toggleMenu = () => {
 export const quitModal = () => {
     onCloseModalAnimation();
 
-    setTimeout(() => {
-        document.querySelector('.login-modal').classList.add('hide-items');
-        document.querySelector('.--register').classList.add('hide-items');
-        document.querySelector('.add-contact').classList.add('hide-items');
-    }, 500);
+    try {
+        setTimeout(() => {
+            document.querySelector('.login-modal').classList.add('hide-items');
+            document.querySelector('.--register').classList.add('hide-items');
+            document.querySelector('.add-contact').classList.add('hide-items');
+            document.querySelector('.options-modal--container').classList.add('hide-items');    
+        }, 500);
+    } catch (err) {
+        console.log(err)
+    }
 }
 
 //construtor function: constroi a interface para
@@ -143,6 +154,7 @@ const constructOptionButtons = (contactMore) => {
     var svgImg2 = document.createElement('img');
 
     divContainer.classList.add("options-modal--container");
+    divContainer.classList.add("hide-items");
     contactMore.append(divContainer);
 
     divOptions.classList.add("options-modal");

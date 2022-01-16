@@ -14,8 +14,19 @@
     --background-modal-color: rgba(0, 0, 0, .5);
 }
 
+
+@font-face {
+    font-family: "Roboto Mono";
+    src: url('../fonts/RobotoMono-VariableFont_wght.ttf');
+}
+
+@font-face {
+    font-family: "Bitter";
+    src: url('../fonts/Bitter-VariableFont_wght.ttf');
+}
+
 * {
-    font-family: Montserrat, sans-serif;
+    font-family: "Bitter", sans-serif;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -30,17 +41,21 @@ header {
     top: 0;
     width: 100%;
     padding: 0 .9em;
-    box-shadow: 0 0 5px 2px var(--shadow-color);
+    box-shadow: 0 0 3px 2px rgba(0, 0, 0, .2);
     z-index: 10;
 }
 
 .logo {
+    font-family: 'Bitter', sans-serif;
     display: inline-block;
     padding: 1rem 0;
     line-height: 2rem;
     font-size: 1.2rem;
-    font-weight: 800;
-    color: var(--darker-color);
+    font-weight: bolder;
+    background-image: linear-gradient(120deg, var( --smoth-green-color) 10%, var(--white-color) 40%, var(--dark-grey-color) 110%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
     letter-spacing: .1rem;
     user-select: none;
 }
@@ -56,6 +71,7 @@ header {
     display: flex;
     justify-content: flex-end;
     line-height: 2rem;
+    font-family: "Roboto Mono";
 }
 
 .nav-item {
@@ -279,7 +295,13 @@ main {
 }
 
 /* ==============footer================ */
-
+footer {  
+    font-family: "Roboto Mono", sans-serif;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 .info-footer {
     background-color: var(--blue-cian-color);
@@ -295,7 +317,7 @@ main {
     z-index: 10;
 }
 
-@media  screen and (max-width: 690px) {
+@media  screen and (max-width: 780px) {
     header {
         display: block;
     }

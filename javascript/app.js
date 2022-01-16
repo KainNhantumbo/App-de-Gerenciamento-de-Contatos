@@ -1,27 +1,36 @@
 'use strict';
-import './functions.js';
 import { colorRandomizer } from './functions.js';
 import { onCloseModalAnimation } from './animations.js';
 import { quitModal } from './functions.js';
 import { setDataToStorage } from './functions.js';
-import { getDataFromStorage } from './functions.js';
 import { rendererRefresh } from './functions.js';
 import { toggleMenu } from './functions.js';
 import { divMsg } from './functions.js';
 import { userSignup } from './functions.js';
-import { darkmode } from './functions.js';
+import { darkMode } from './functions.js';
 
 import { loginModal } from './modals.js';
 import { addContactModal } from './modals.js';
 import { registerModal } from './modals.js';
+import { openOptionsModal } from './modals.js';
 
-const $data = JSON.parse(localStorage.getItem("user"));
 const welcome = () => {
     const welcomeMsg = document.createElement('div');
     welcomeMsg.classList.add('welcome');
-    const name = $data.username;
-    welcomeMsg.textContent = "Olá "+name+", bem vindo ao sistema.";
-    document.querySelector('.main-container').prepend(welcomeMsg);
+    const $data = JSON.parse(localStorage.getItem("user"));
+
+    try {
+        if ($data === null) {
+            return console.log('Faça o cadastro para acessar a aplicação.');
+        } else if ($data !== null) {
+            const name = $data.name;
+            welcomeMsg.textContent = "Olá "+name+", bem vindo ao sistema.";
+            document.querySelector('.main-container').prepend(welcomeMsg);
+        }
+    } catch (err) {
+        console.log(err);
+    }
+
 }
 
 const getContactData = () => {
@@ -51,7 +60,7 @@ const getContactData = () => {
         setDataToStorage('contactsData', data);
         rendererRefresh('contactsData');
         quitModal();
-        document.querySelectorAll('.--item').forEach(item => item.value = null)
+        document.querySelectorAll('.--item').forEach(item => item.value = null);
     }
 }
 
@@ -94,8 +103,8 @@ const userLogin = () => {
             divMsg("Dados inválidos.");
         }
 
-    } catch (error) {
-        console.log(error);
+    } catch (err) {
+        console.log(err);
     }
 }
 
@@ -116,23 +125,33 @@ function loadEvents () {
     welcome();
     colorRandomizer();
     rendererRefresh('contactsData');
-    document.querySelectorAll('.btn--display-options').forEach(item => {
-        item.addEventListener('click', e => {
+
+    try {
+        document.querySelector('.btn--display-options').addEventListener('click', e => {
+            e.preventDefault();
+            openOptionsModal()
+            removeContact();
+        });
+    } catch(err) {
+        console.log(err)
+    }
+    
+
+    document.querySelectorAll(".btn-delete").forEach(btn => {
+        btn.addEventListener('click', e => {
             e.preventDefault();
             removeContact();
         });
     });
     document.querySelector('.btn-save--contact').addEventListener('click', getContactData);
-    document.querySelector('.btn-dark--mode').addEventListener('click', darkmode);
+    document.querySelector('.btn-dark--mode').addEventListener('click', darkMode);
     /* document.querySelector('.login-modal').addEventListener('click', e => {
-        e.cancelBubble;
-        e.stopPropagation()
-        e.stopImmediatePropagation();
         e.stopPropagation();
-        e.preventDefault();
+        e.cancelBubble;
+        console.log(e.BUBBLING_PHASE)
         quitModal();
-        console.log(e.target)
-    }); */
+        console.log(e.target);
+    }, { capture: true}); */
 }
 window.addEventListener('load', loadEvents);
 
