@@ -1,5 +1,4 @@
 'use strict';
-import { colorRandomizer } from './functions.js';
 import { onCloseModalAnimation } from './animations.js';
 import { quitModal } from './functions.js';
 import { setDataToStorage } from './functions.js';
@@ -8,30 +7,11 @@ import { toggleMenu } from './functions.js';
 import { divMsg } from './functions.js';
 import { userSignup } from './functions.js';
 import { darkMode } from './functions.js';
-
 import { loginModal } from './modals.js';
 import { addContactModal } from './modals.js';
 import { registerModal } from './modals.js';
 import { openOptionsModal } from './modals.js';
-
-const welcome = () => {
-    const welcomeMsg = document.createElement('div');
-    welcomeMsg.classList.add('welcome');
-    const $data = JSON.parse(localStorage.getItem("user"));
-
-    try {
-        if ($data === null) {
-            return console.log('Faça o cadastro para acessar a aplicação.');
-        } else if ($data !== null) {
-            const name = $data.name;
-            welcomeMsg.textContent = "Olá "+name+", bem vindo ao sistema.";
-            document.querySelector('.main-container').prepend(welcomeMsg);
-        }
-    } catch (err) {
-        console.log(err);
-    }
-
-}
+import { welcome } from './functions.js';
 
 const getContactData = () => {
     let contactName = document.getElementById('contact-name').value;
@@ -47,7 +27,7 @@ const getContactData = () => {
         email:contactEmail,
         address: contactAddress
     }
-
+    
     var data = JSON.parse(localStorage.getItem('contactsData'));
     
     if (contactName === '' || contactPhone === '' && contactPhone === NaN || contactNote === '') {
@@ -64,9 +44,7 @@ const getContactData = () => {
     }
 }
 
-
 // elimina o contacto
-
 const removeContact = () => {
     var data = JSON.parse(localStorage.getItem('contactsData'));
     function removerItem (index) {
@@ -83,9 +61,10 @@ const removeContact = () => {
 }   
 
 //login do usuário com os dados salvos no navegador
-const userLogin = () => {
+const userLogin = (e) => {
     const passwordSignIn = document.getElementById('password-input-signin').value;
     const emailSignIn = document.getElementById('email-input-signin').value;
+    e.preventDefault();
     
     // carrega os dados salvos no localStorage
     const $data = JSON.parse(localStorage.getItem('user'));
@@ -97,9 +76,8 @@ const userLogin = () => {
             
         if (emailSignIn === $data.email && passwordSignIn === $data.password) {
             quitModal();
-            console.log('sucesso')
+            console.log('Sucesso.');
         } else {
-            window.location.pathname;
             divMsg("Dados inválidos.");
         }
 
@@ -107,8 +85,6 @@ const userLogin = () => {
         console.log(err);
     }
 }
-
-
 
 // carrega os eventos
 function loadEvents () {
@@ -123,7 +99,6 @@ function loadEvents () {
     document.querySelector('.btn-entrar').addEventListener('click', userLogin);
     document.getElementById('btn-signup').addEventListener('click', userSignup);
     welcome();
-    colorRandomizer();
     rendererRefresh('contactsData');
 
     try {
@@ -136,7 +111,6 @@ function loadEvents () {
         console.log(err)
     }
     
-
     document.querySelectorAll(".btn-delete").forEach(btn => {
         btn.addEventListener('click', e => {
             e.preventDefault();
@@ -145,13 +119,10 @@ function loadEvents () {
     });
     document.querySelector('.btn-save--contact').addEventListener('click', getContactData);
     document.querySelector('.btn-dark--mode').addEventListener('click', darkMode);
-    /* document.querySelector('.login-modal').addEventListener('click', e => {
-        e.stopPropagation();
-        e.cancelBubble;
-        console.log(e.BUBBLING_PHASE)
-        quitModal();
-        console.log(e.target);
-    }, { capture: true}); */
+    document.querySelector('.modal-container').addEventListener('click', quitModal);
+    document.querySelector('.--login').addEventListener('click', e => e.stopPropagation());
+    document.querySelector('.--register').addEventListener('click', e => e.stopPropagation());
+    document.querySelector('.add-contact').addEventListener('click', e => e.stopPropagation());
 }
 window.addEventListener('load', loadEvents);
 

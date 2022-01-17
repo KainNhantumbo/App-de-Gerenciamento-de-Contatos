@@ -11,7 +11,7 @@ export const loginModal = () => {
 }
 
 //mostra ou oculta o modal de cadastro
-export const registerModal = () => {
+export const registerModal = (event) => {
     document.querySelector('.login-modal').classList.toggle('hide-items');
     document.querySelector('.--register').classList.toggle('hide-items');
     document.querySelector('.--login').classList.add('hide-items');

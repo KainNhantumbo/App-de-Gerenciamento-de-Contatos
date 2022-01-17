@@ -8,6 +8,13 @@ export const setDataToStorage = (key, data) => {
 //carrega os dados do localStorage
 export const getDataFromStorage = (key) => {
     const data = JSON.parse(localStorage.getItem(key));
+    data.sort((a, b) => {
+        if (a.name < b.name){
+            return -1;
+        } else {
+            return true;
+        }
+    })
     rendererContacts(data);
 }
 
@@ -37,12 +44,30 @@ export const rendererContacts = (data) => {
 }
 
 // gera cor aleatória rgba
-export const colorRandomizer = () => {
+const colorRandomizer = () => {
     var r = Math.floor(Math.random()*255);
     var g = Math.floor(Math.random()*255);
     var b = Math.floor(Math.random()*255);
     const color = r+','+g+','+b;
     return color;
+}
+
+export const welcome = () => {
+    const welcomeMsg = document.createElement('div');
+    welcomeMsg.classList.add('welcome');
+    const $data = JSON.parse(localStorage.getItem("user"));
+
+    try {
+        if ($data === null) {
+            return console.log('Faça o cadastro para acessar a aplicação.');
+        } else if ($data !== null) {
+            const name = $data.name;
+            welcomeMsg.textContent = "Olá "+name+", bem vindo ao sistema.";
+            document.querySelector('.main-container').prepend(welcomeMsg);
+        }
+    } catch (err) {
+        console.log(err);
+    }
 }
 
 // muda para modo noturno e vice-versa
