@@ -168,7 +168,7 @@
 .btn--display-options {
     box-shadow: none;
     background: none;
-    padding: 5px 10px;
+    padding: 1px 10px;
     margin: 0 auto;
     position: relative;
 }
@@ -189,7 +189,7 @@
 }
 
 .more-svg {
-    width: 5px;
+    width: 25px;
 }
 .chvronr-svg{
     width: 8px;
@@ -238,6 +238,10 @@
     user-select: none;
 }
 
+.contacts-header--info {
+    border-bottom: 2px solid var(--white-color);
+}
+
 .contact-item {
     padding: .5em;
     line-height: 1.8rem;
@@ -250,10 +254,12 @@
 
 .contact-more {
     border-radius: 0 5px 5px 0;
+    border-right: 2px solid var(--white-color);
 }
 
 .contact-name {
     border-radius: 5px 0 0 5px;
+    border-left: 2px solid var(--white-color);
 }
 
 .--dark-background {

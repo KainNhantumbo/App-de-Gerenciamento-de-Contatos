@@ -95,11 +95,12 @@
 
                 <label class="form-item" for="gender">Gênero</label>
 
-                <select class="form-item" name="gender" placeholder="Selecionar" id="gender">
+                <input type="text" list="generos" class="form-item" name="gender" placeholder="Selecionar gênero" id="gender">
+                <datalist id="generos">
                     <option value="Diferente">Diferente</option>
                     <option value="Masculino">Masculino</option>
                     <option value="Femenino">Femenino</option>
-                </select>
+                </datalist>
 
                 <button class="form-item btn-signup" type="submit" id="btn-signup">
                     Cadastre-se
@@ -121,28 +122,40 @@
                 <input class="form-item --item" name="contact-name" type="text" placeholder="Nome do contato..." id="contact-name">
                 
                 <label class="form-item" for="contact-number">
-                    Número de Telefone
+                    Telefone
                 </label>
                 <input class="form-item --item" type="tel" name="contact-number" placeholder="Número de telefone..." id="contact-number">
-
-                <label class="form-item" for="contact-note">
-                    Anotações
-                </label>
-                <input class="form-item --item" type="text" placeholder="Escreva uma nota" name="contact-note" id="contact-note">
 
                 <label class="form-item" for="contact-email">
                     E-mail
                 </label>
                 <input class="form-item --item"  type="email" name="contact-email" placeholder="Escreva o e-mail..." autocomplete="contact-name" id="contact-email">
 
-                <label class="form-item" for="contact-adress">
-                    Morada
-                </label>
-                <input class="form-item --item" type="text" name="contact" placeholder="Morada do contato..." id="contact-adress">
+                <div class="btns-container">
+                    <button class="form-item btn-save--contact">
+                        Salvar
+                    </button>
+                    <button class="form-item btn-cancel--contact">
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+
+            <!--------------- Confirm Modal ----------------->
+            <div class="modal-form confirm-modal hide-items">
+                <div class="form-title form-item">
+                    Confirmar
+                    <div class="btn-quit">
+                        <img src="./svgs/xmark.svg" alt="xmark icon">
+                    </div>
+                </div>
+                <p style="line-height: 1.8rem;">
+                    Tem certeza que pretende eliminar o contato do banco de dados?
+                </p>
 
                 <div class="btns-container">
-                    <button class="form-item btn-save--contact" type="submit">
-                        Salvar
+                    <button class="form-item btn-confirm">
+                        Eliminar
                     </button>
                     <button class="form-item btn-cancel--contact">
                         Cancelar
@@ -180,13 +193,13 @@
                             Nome
                         </div>
                         <div class="contacts-header--info" id="header-id">
-                            Número de Telefone
+                            Telefone
                         </div>
                         <div class="contacts-header--info" id="header-notation">
-                            Anotações
+                            Email
                         </div>
                         <div class="contacts-header--info" id="header-actions">
-                            Opções
+                            Apagar
                         </div>
                     </div>
                 </div>

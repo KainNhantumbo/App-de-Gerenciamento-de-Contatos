@@ -11,7 +11,7 @@ export const loginModal = () => {
 }
 
 //mostra ou oculta o modal de cadastro
-export const registerModal = (event) => {
+export const registerModal = () => {
     document.querySelector('.login-modal').classList.toggle('hide-items');
     document.querySelector('.--register').classList.toggle('hide-items');
     document.querySelector('.--login').classList.add('hide-items');
@@ -29,6 +29,9 @@ export const addContactModal = () => {
 }
 
 //mostra ou oculta o modal de opções de contato
-export const openOptionsModal = () => {
-    document.querySelector('.options-modal--container').classList.toggle('hide-items');  
+export const confirmModal = () => {
+    document.querySelector('.login-modal').classList.toggle('hide-items');
+    document.querySelector('.confirm-modal').classList.toggle('hide-items');
+    document.querySelector('.--login').classList.add('hide-items');
+    onOpenModalAnimation(); 
 }

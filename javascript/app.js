@@ -10,27 +10,25 @@ import { darkMode } from './functions.js';
 import { loginModal } from './modals.js';
 import { addContactModal } from './modals.js';
 import { registerModal } from './modals.js';
-import { openOptionsModal } from './modals.js';
 import { welcome } from './functions.js';
+import { deleteButton } from './functions.js';
+import { log } from './functions.js';
+import { fetchDataFromStorage } from './functions.js';
 
 const getContactData = () => {
     let contactName = document.getElementById('contact-name').value;
-    let contactPhone = document.getElementById('contact-number').value;
-    let contactNote = document.getElementById('contact-note').value;
+    let contactPhone = document.getElementById('contact-number').value;  
     let contactEmail= document.getElementById('contact-email').value;
-    let contactAddress = document.getElementById('contact-adress').value;
     
     const $contactsData = {
         name: contactName,
         phone: contactPhone,
-        note: contactNote,
         email:contactEmail,
-        address: contactAddress
     }
     
-    var data = JSON.parse(localStorage.getItem('contactsData'));
+    var data = fetchDataFromStorage('contactsData');
     
-    if (contactName === '' || contactPhone === '' && contactPhone === NaN || contactNote === '') {
+    if (contactName === '' || contactPhone === '' && contactPhone === NaN) {
         divMsg('Prencha pelo o menos nome, telefone e coloque uma anotação antes de salvar!');
     } else {
         if (data === null) {
@@ -44,22 +42,6 @@ const getContactData = () => {
     }
 }
 
-// elimina o contacto
-const removeContact = () => {
-    var data = JSON.parse(localStorage.getItem('contactsData'));
-    function removerItem (index) {
-        var datex = data.shift(index, 0);
-        console.log(datex)
-    }
-    
-    const contact = document.querySelectorAll('.contacts-data');
-    contact.forEach(item => {
-        const index = item.dataset.index;
-        removerItem(index);
-    });
-    console.log(data);
-}   
-
 //login do usuário com os dados salvos no navegador
 const userLogin = (e) => {
     const passwordSignIn = document.getElementById('password-input-signin').value;
@@ -67,7 +49,7 @@ const userLogin = (e) => {
     e.preventDefault();
     
     // carrega os dados salvos no localStorage
-    const $data = JSON.parse(localStorage.getItem('user'));
+    const $data = fetchDataFromStorage("user");
 
     // verifica se o usuário pode logar
     try {
@@ -91,6 +73,19 @@ function loadEvents () {
     document.querySelectorAll('.btn-quit').forEach(item => {
         item.addEventListener('click', quitModal);
     });
+
+    /* const btnQuit = () => {
+        const container = document.querySelector('.login-modal');
+        container.addEventListener('click', e => {
+            e.stopPropagation();
+            const clickedElement = e.target;
+            if(clickedElement.classList.contains('btn-quit')) {
+                quitModal();
+            }
+        });
+    }
+    btnQuit() */
+
     document.querySelector('.btn-cancel--contact').addEventListener('click', quitModal, onCloseModalAnimation)
     document.querySelector('#btn-login').addEventListener('click', loginModal);
     document.querySelector('.btn-menu').addEventListener('click', toggleMenu);
@@ -100,29 +95,15 @@ function loadEvents () {
     document.getElementById('btn-signup').addEventListener('click', userSignup);
     welcome();
     rendererRefresh('contactsData');
+    deleteButton();
 
-    try {
-        document.querySelector('.btn--display-options').addEventListener('click', e => {
-            e.preventDefault();
-            openOptionsModal()
-            removeContact();
-        });
-    } catch(err) {
-        console.log(err)
-    }
-    
-    document.querySelectorAll(".btn-delete").forEach(btn => {
-        btn.addEventListener('click', e => {
-            e.preventDefault();
-            removeContact();
-        });
-    });
     document.querySelector('.btn-save--contact').addEventListener('click', getContactData);
     document.querySelector('.btn-dark--mode').addEventListener('click', darkMode);
     document.querySelector('.modal-container').addEventListener('click', quitModal);
     document.querySelector('.--login').addEventListener('click', e => e.stopPropagation());
     document.querySelector('.--register').addEventListener('click', e => e.stopPropagation());
     document.querySelector('.add-contact').addEventListener('click', e => e.stopPropagation());
+    // document.querySelector('.options-modal--container').addEventListener('click', e => e.stopPropagation());
 }
 window.addEventListener('load', loadEvents);
 

@@ -1,4 +1,10 @@
 import { onCloseModalAnimation } from "./animations.js";
+import { confirmModal } from "./modals.js";
+
+//retorna o console.log
+export function log (content) {
+    return console.log(content);
+}
 
 // salva os dados no localStorage
 export const setDataToStorage = (key, data) => {
@@ -8,14 +14,51 @@ export const setDataToStorage = (key, data) => {
 //carrega os dados do localStorage
 export const getDataFromStorage = (key) => {
     const data = JSON.parse(localStorage.getItem(key));
-    data.sort((a, b) => {
-        if (a.name < b.name){
-            return -1;
-        } else {
-            return true;
-        }
-    })
     rendererContacts(data);
+}
+
+// retorna dados do localStorage
+export const fetchDataFromStorage = (key) => {
+    const data = JSON.parse(localStorage.getItem(key));
+    return data;
+}
+
+// sorteia o array em ordem alfabética
+const arraySort = (data) => {
+    try {
+        data.sort((a, b) => {
+            if (a.name < b.name){
+                return -1;
+            } else {
+                return true;
+            }
+        });
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+// elimina o contacto
+const removeContact = (index) => {
+    var data = fetchDataFromStorage('contactsData'); 
+    data.splice(index, 1);
+    setDataToStorage('contactsData', data);
+    rendererRefresh('contactsData');     
+}
+
+// adiciona um evento click ao botão options
+export const deleteButton = () => {
+    const container = document.querySelector('.app-body');
+    container.addEventListener('click', e => {
+        e.stopPropagation(); 
+        const clickedElement = e.target;
+        if (clickedElement.tagName === 'BUTTON' || clickedElement.classList.contains('more-svg')) {
+            e.preventDefault();
+            const index = clickedElement.dataset.index;
+            removeContact(index);
+            /* confirmModal(); */
+        }
+    });
 }
 
 // atualiza a tela ao modificar os contatos
@@ -27,7 +70,6 @@ export const rendererRefresh = (key) => {
 //limpa a tela antes da atualização dos contatos
 export const rendererClear = () => {
     const contactsContainer = document.querySelector('.saved-contacts--container');
-
     while (contactsContainer.firstChild){
         contactsContainer.removeChild(contactsContainer.lastChild);
     }
@@ -36,26 +78,27 @@ export const rendererClear = () => {
 // atualiza a tela com os contatos salvos
 export const rendererContacts = (data) => {
     if (data !== null) {
-        data.forEach((item, index) => constructContacts(item.name, item.phone, item.note, index));
+        data.forEach((item, index) => constructContacts(item.name, item.phone, item.email, index));
     } else {
         data = [];
-        console.log('Sem nada para mostar na tela.');
     }
 }
 
-// gera cor aleatória rgba
+// gera cor rgba aleatória
 const colorRandomizer = () => {
     var r = Math.floor(Math.random()*255);
     var g = Math.floor(Math.random()*255);
     var b = Math.floor(Math.random()*255);
-    const color = r+','+g+','+b;
+    var a = (Math.random()*1).toFixed(1);
+    const color = r+','+g+','+b+','+a;
     return color;
 }
 
+// mostra a mensagem de boas vindas ao usuário
 export const welcome = () => {
     const welcomeMsg = document.createElement('div');
     welcomeMsg.classList.add('welcome');
-    const $data = JSON.parse(localStorage.getItem("user"));
+    const $data = fetchDataFromStorage("user");
 
     try {
         if ($data === null) {
@@ -110,22 +153,21 @@ export const toggleMenu = () => {
 //remove o modal
 export const quitModal = () => {
     onCloseModalAnimation();
-
     try {
         setTimeout(() => {
             document.querySelector('.login-modal').classList.add('hide-items');
             document.querySelector('.--register').classList.add('hide-items');
             document.querySelector('.add-contact').classList.add('hide-items');
-            document.querySelector('.options-modal--container').classList.add('hide-items');    
+            document.querySelector('.confirm-modal').classList.add('hide-items');    
         }, 500);
     } catch (err) {
-        console.log(err)
+        console.log(err);
     }
 }
 
 //construtor function: constroi a interface para
 // os contactos
-export const constructContacts = (name, phone, note, index) => {
+export const constructContacts = (name, phone, email, index) => {
     const container = document.querySelector('.saved-contacts--container');
     const divContactData = document.createElement('div');
     const divContact_name = document.createElement('div');
@@ -136,7 +178,6 @@ export const constructContacts = (name, phone, note, index) => {
     const imgContact = document.createElement('img');
 
     divContactData.classList.add('contacts-data');
-    divContactData.setAttribute('data-index', index);
     container.append(divContactData);
 
     divContact_name.classList.add('contact-name');
@@ -151,7 +192,7 @@ export const constructContacts = (name, phone, note, index) => {
 
     divContact_note.classList.add('contact-note');
     divContact_note.classList.add('contact-item');
-    divContact_note.textContent = note;
+    divContact_note.textContent = email;
     divContactData.append(divContact_note);
 
     divContact_more.classList.add('contact-more');
@@ -159,14 +200,16 @@ export const constructContacts = (name, phone, note, index) => {
     divContactData.append(divContact_more);
 
     btnContact_more.classList.add('btn--display-options');
+    btnContact_more.setAttribute('data-index', index);
     divContact_more.append(btnContact_more);
 
     imgContact.classList.add('more-svg');
     imgContact.alt = 'more-icon';
-    imgContact.src = './svgs/ellipsis-vertical.svg';
+    imgContact.src = './svgs/delete.svg';
+    imgContact.setAttribute('data-index', index);
     btnContact_more.append(imgContact);
 
-    constructOptionButtons(btnContact_more);
+    // constructOptionButtons(btnContact_more);
 }
 
 // constroi botões de opções para cada contacto
@@ -232,7 +275,7 @@ export const userSignup = () => {
 
 // constroi uma div para mensagens de erro
 export const divMsg = (msg) => {
-    const formBox = document.querySelectorAll('.modal-form');; 
+    const formBox = document.querySelectorAll('.modal-form'); 
 
     for (let i = 0; i < formBox.length; i++) {
         const div = document.createElement('div');
