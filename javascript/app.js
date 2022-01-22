@@ -1,7 +1,6 @@
 'use strict';
 import { onCloseModalAnimation } from './animations.js';
 import { quitModal } from './functions.js';
-import { setDataToStorage } from './functions.js';
 import { rendererRefresh } from './functions.js';
 import { toggleMenu } from './functions.js';
 import { divMsg } from './functions.js';
@@ -15,39 +14,15 @@ import { deleteButton } from './functions.js';
 import { setColors } from './functions.js';
 import { log } from './functions.js';
 import { fetchDataFromStorage } from './functions.js';
+import { getContactData } from './functions.js';
+import { nothingToShow } from './functions.js';
 
-const getContactData = () => {
-    let contactName = document.getElementById('contact-name').value;
-    let contactPhone = document.getElementById('contact-number').value;  
-    let contactEmail= document.getElementById('contact-email').value;
-    
-    const $contactsData = {
-        name: contactName,
-        phone: contactPhone,
-        email:contactEmail,
-    }
-    
-    var data = fetchDataFromStorage('contactsData');
-    
-    if (contactName === '' || contactPhone === '' && contactPhone === NaN) {
-        divMsg('Prencha pelo o menos nome, telefone e coloque uma anotação antes de salvar!');
-    } else {
-        if (data === null) {
-            data = [];
-        }
-        data.push($contactsData);
-        setDataToStorage('contactsData', data);
-        rendererRefresh('contactsData');
-        quitModal();
-        document.querySelectorAll('.--item').forEach(item => item.value = null);
-    }
-}
 
 //login do usuário com os dados salvos no navegador
 const userLogin = (e) => {
+    e.preventDefault();
     const passwordSignIn = document.getElementById('password-input-signin').value;
     const emailSignIn = document.getElementById('email-input-signin').value;
-    e.preventDefault();
     
     // carrega os dados salvos no localStorage
     const $data = fetchDataFromStorage("user");
@@ -63,7 +38,6 @@ const userLogin = (e) => {
         } else {
             divMsg("Dados inválidos.");
         }
-
     } catch (err) {
         console.log(err);
     }
@@ -75,6 +49,7 @@ function loadEvents () {
     rendererRefresh('contactsData');
     deleteButton();
     setColors();
+    nothingToShow()
     document.querySelectorAll('.btn-quit').forEach(item => {
         item.addEventListener('click', quitModal);
     });
@@ -95,4 +70,3 @@ function loadEvents () {
 
 // inicia os eventos e funções
 window.addEventListener('load', loadEvents);
-

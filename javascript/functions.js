@@ -180,6 +180,32 @@ export const quitModal = () => {
     }
 }
 
+// pega os dados do contato a ser salvo
+export const getContactData = () => {
+    let contactName = document.getElementById('contact-name').value;
+    let contactPhone = document.getElementById('contact-number').value;  
+    let contactEmail= document.getElementById('contact-email').value; 
+    var data = fetchDataFromStorage('contactsData');
+    const $contactsData = {
+        name: contactName,
+        phone: contactPhone,
+        email:contactEmail,
+    }
+    
+    if (contactName === '' || contactPhone === '' && contactPhone === NaN) {
+        divMsg('Prencha pelo o menos nome, telefone e coloque uma anotação antes de salvar!');
+    } else {
+        if (data === null) {
+            data = [];
+        }
+        data.push($contactsData);
+        setDataToStorage('contactsData', data);
+        rendererRefresh('contactsData');
+        quitModal();
+        document.querySelectorAll('.--item').forEach(item => item.value = null);
+    }
+}
+
 //construtor function: constroi a interface para
 // os contactos
 export const constructContacts = (name, phone, email, index) => {
@@ -279,7 +305,6 @@ export const userSignup = () => {
     const birthdate = document.getElementById('birthdate').value;
     const gender = document.getElementById('gender').value;
     const setupTime = new Date();
-
     const $userData = {
         firstName: firstName,
         lastName: lastName,
@@ -295,7 +320,7 @@ export const userSignup = () => {
     quitModal();
 }
 
-// constroi uma div para mensagens de erro
+// constroi uma div para mensagens de alerta ao usuário
 export const divMsg = (msg) => {
     const formBox = document.querySelectorAll('.modal-form'); 
 
@@ -311,10 +336,41 @@ export const divMsg = (msg) => {
         div.style.textAlign = 'center';
         div.style.borderRadius = '5px';
         div.textContent = msg;
-        formBox[i].append(div);
+        
+        // impede que mais de uma mensagem de alerta seja exibida
+        if (formBox[i].lastChild.nodeName !== '#text') {
+            return
+        } else {
+            formBox[i].append(div);
+        }
 
+        // retira a mensagem após o tempo especificado
         setTimeout(() => {
             formBox[i].removeChild(div);
         }, 2000);
+    }
+}
+
+// chamado quando não houverem contatos salvos
+// por apresentar na tela
+export function nothingToShow () {
+    const container = document.querySelector('.saved-contacts--container');
+    const divContactData = document.createElement('div');
+    const data = fetchDataFromStorage('contactsData');
+
+    if (data.length <= 0) {
+        divContactData.classList.add('contacts-data');
+        divContactData.innerHTML = `Sem contatos salvos.<br>Os contatos que for a salvar aparecerão aqui!`;
+        divContactData.style.width = '98%';
+        divContactData.style.margin = '2vh auto';
+        divContactData.style.backgroundColor = 'rgba(0,0,0,.1)';
+        divContactData.style.fontSize = '1.6rem';
+        divContactData.style.lineHeight = '2rem';
+        divContactData.style.color = '#000';
+        divContactData.style.textAlign= 'center';
+        divContactData.style.textAlign= 'center';
+        divContactData.style.paddingTop= '10vh';
+        divContactData.style.paddingBottom= '10vh';
+        container.append(divContactData);
     }
 }
