@@ -123,7 +123,6 @@
 
 .welcome {
     width: 100%;
-    font-weight: 500;
     text-transform: uppercase;
     font-size: .9rem;
     text-align: center;
@@ -132,7 +131,7 @@
     background-color: var(--smoth-green-color);
     z-index: 9;
     position: fixed;
-    top: 9vh;
+    top: 12vh;
     user-select: none;
 }
 
@@ -163,6 +162,7 @@
     display: flex;
     justify-content: space-evenly;
     gap: .5em;
+    border-bottom: 3px solid transparent;
 }
 
 .btn--display-options {
@@ -181,7 +181,8 @@
 .btn-dark--mode:hover,
 .btn-new--contact:hover {
     background: var(--dark-grey-color);
-    transition: all 900ms ease;
+    transition: all 700ms ease;
+    border-bottom: 3px solid var(--white-color);
 }
 
 .moon-svg, .plus-svg {
@@ -250,16 +251,17 @@
     border-radius: 0;
     font-weight: 400;
     line-break: loose;
+    accent-color: white;
 }
 
 .contact-more {
     border-radius: 0 5px 5px 0;
-    border-right: 2px solid var(--white-color);
+    /* border-right: 2px solid var(--white-color); */
 }
 
 .contact-name {
     border-radius: 5px 0 0 5px;
-    border-left: 2px solid var(--white-color);
+    /* border-left: 2px solid var(--white-color); */
 }
 
 .--dark-background {

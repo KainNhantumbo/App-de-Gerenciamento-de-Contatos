@@ -12,6 +12,7 @@ import { addContactModal } from './modals.js';
 import { registerModal } from './modals.js';
 import { welcome } from './functions.js';
 import { deleteButton } from './functions.js';
+import { setColors } from './functions.js';
 import { log } from './functions.js';
 import { fetchDataFromStorage } from './functions.js';
 
@@ -68,24 +69,15 @@ const userLogin = (e) => {
     }
 }
 
-// carrega os eventos
+// carrega os eventos e funções
 function loadEvents () {
+    welcome();
+    rendererRefresh('contactsData');
+    deleteButton();
+    setColors();
     document.querySelectorAll('.btn-quit').forEach(item => {
         item.addEventListener('click', quitModal);
     });
-
-    /* const btnQuit = () => {
-        const container = document.querySelector('.login-modal');
-        container.addEventListener('click', e => {
-            e.stopPropagation();
-            const clickedElement = e.target;
-            if(clickedElement.classList.contains('btn-quit')) {
-                quitModal();
-            }
-        });
-    }
-    btnQuit() */
-
     document.querySelector('.btn-cancel--contact').addEventListener('click', quitModal, onCloseModalAnimation)
     document.querySelector('#btn-login').addEventListener('click', loginModal);
     document.querySelector('.btn-menu').addEventListener('click', toggleMenu);
@@ -93,17 +85,14 @@ function loadEvents () {
     document.querySelector('.btn-new--contact').addEventListener('click', addContactModal);
     document.querySelector('.btn-entrar').addEventListener('click', userLogin);
     document.getElementById('btn-signup').addEventListener('click', userSignup);
-    welcome();
-    rendererRefresh('contactsData');
-    deleteButton();
-
     document.querySelector('.btn-save--contact').addEventListener('click', getContactData);
     document.querySelector('.btn-dark--mode').addEventListener('click', darkMode);
     document.querySelector('.modal-container').addEventListener('click', quitModal);
     document.querySelector('.--login').addEventListener('click', e => e.stopPropagation());
     document.querySelector('.--register').addEventListener('click', e => e.stopPropagation());
     document.querySelector('.add-contact').addEventListener('click', e => e.stopPropagation());
-    // document.querySelector('.options-modal--container').addEventListener('click', e => e.stopPropagation());
 }
+
+// inicia os eventos e funções
 window.addEventListener('load', loadEvents);
 

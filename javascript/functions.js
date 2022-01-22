@@ -1,5 +1,4 @@
 import { onCloseModalAnimation } from "./animations.js";
-import { confirmModal } from "./modals.js";
 
 //retorna o console.log
 export function log (content) {
@@ -8,6 +7,7 @@ export function log (content) {
 
 // salva os dados no localStorage
 export const setDataToStorage = (key, data) => {
+    arraySort(data)
     localStorage.setItem(key, JSON.stringify(data));
 }
 
@@ -21,44 +21,6 @@ export const getDataFromStorage = (key) => {
 export const fetchDataFromStorage = (key) => {
     const data = JSON.parse(localStorage.getItem(key));
     return data;
-}
-
-// sorteia o array em ordem alfabética
-const arraySort = (data) => {
-    try {
-        data.sort((a, b) => {
-            if (a.name < b.name){
-                return -1;
-            } else {
-                return true;
-            }
-        });
-    } catch (e) {
-        console.log(e);
-    }
-}
-
-// elimina o contacto
-const removeContact = (index) => {
-    var data = fetchDataFromStorage('contactsData'); 
-    data.splice(index, 1);
-    setDataToStorage('contactsData', data);
-    rendererRefresh('contactsData');     
-}
-
-// adiciona um evento click ao botão options
-export const deleteButton = () => {
-    const container = document.querySelector('.app-body');
-    container.addEventListener('click', e => {
-        e.stopPropagation(); 
-        const clickedElement = e.target;
-        if (clickedElement.tagName === 'BUTTON' || clickedElement.classList.contains('more-svg')) {
-            e.preventDefault();
-            const index = clickedElement.dataset.index;
-            removeContact(index);
-            /* confirmModal(); */
-        }
-    });
 }
 
 // atualiza a tela ao modificar os contatos
@@ -84,32 +46,85 @@ export const rendererContacts = (data) => {
     }
 }
 
-// gera cor rgba aleatória
-const colorRandomizer = () => {
+// sorteia o array em ordem alfabética
+const arraySort = (data) => {
+    try {
+        data.sort((a, b) => {
+            if (a.name < b.name){
+                return -1;
+            } else {
+                return true;
+            }
+        });
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+// adiciona um evento click ao botão options
+export const deleteButton = () => {
+    const container = document.querySelector('.app-body');
+    container.addEventListener('click', e => {
+        e.stopPropagation(); 
+        const clickedElement = e.target;
+        if (clickedElement.tagName === 'BUTTON' || clickedElement.classList.contains('more-svg')) {
+            e.preventDefault();
+            const index = clickedElement.dataset.index;
+            removeContact(index);
+            /* confirmModal(); */
+        }
+    });
+}
+
+// elimina o contacto
+const removeContact = (index) => {
+    var data = fetchDataFromStorage('contactsData'); 
+    data.splice(index, 1);
+    setDataToStorage('contactsData', data);
+    rendererRefresh('contactsData');     
+}
+
+// gera cor rgb e rgba aleatória
+const colorRandomizer = (pattern) => {
     var r = Math.floor(Math.random()*255);
     var g = Math.floor(Math.random()*255);
     var b = Math.floor(Math.random()*255);
-    var a = (Math.random()*1).toFixed(1);
-    const color = r+','+g+','+b+','+a;
-    return color;
+    var a = (Math.random()*0.8).toFixed(1);
+    const rgbColor = `rgb(${r+','+g+','+b})`;
+    const rbgaColor = `rgba(${r+','+g+','+b+','+a})`;
+    if (pattern === 'rgb') {
+        return rgbColor;
+    } else if (pattern === 'rgba') {
+        return rbgaColor;
+    } else {
+        log('Os argumentos para a cor são: rgb ou rgba.');
+    }
+}
+
+// coloca cores em elementos
+export function setColors () {
+    const headerElements =  document.querySelectorAll('.contacts-header--info');
+    const rgba = colorRandomizer('rgba');
+    headerElements.forEach(element => {
+        element.style.borderTop = '2px'+' '+'solid'+' '+rgba;
+    });
 }
 
 // mostra a mensagem de boas vindas ao usuário
-export const welcome = () => {
+export const welcome = async () => {
     const welcomeMsg = document.createElement('div');
     welcomeMsg.classList.add('welcome');
-    const $data = fetchDataFromStorage("user");
-
     try {
+        const $data = await fetchDataFromStorage('user');
         if ($data === null) {
-            return console.log('Faça o cadastro para acessar a aplicação.');
-        } else if ($data !== null) {
-            const name = $data.name;
+            return log('Faça o cadastro para acessar a aplicação.');
+        } else {
+            const name = $data.username;
             welcomeMsg.textContent = "Olá "+name+", bem vindo ao sistema.";
             document.querySelector('.main-container').prepend(welcomeMsg);
         }
     } catch (err) {
-        console.log(err);
+        log(err);
     }
 }
 
@@ -119,7 +134,7 @@ export const darkMode = () => {
     const toolbar = document.querySelector('.toolbar');
     const appBody = document.querySelector('.app-body');
     const btnDarkmode = document.querySelector('.svg-container');
-    const darkMoonRegular = ` <img class="moon-svg" src="./svgs/moon-regular.svg" alt="dark mode regular">`;
+    const darkMoonRegular = `<img class="moon-svg" src="./svgs/moon-regular.svg" alt="dark mode regular">`;
     const darkMoonSolid = `<img class="moon-svg" src="./svgs/moon-solid.svg" alt="dark mode solid">`;
 
     switch (btnDarkmode.innerHTML) {
@@ -161,7 +176,7 @@ export const quitModal = () => {
             document.querySelector('.confirm-modal').classList.add('hide-items');    
         }, 500);
     } catch (err) {
-        console.log(err);
+        log(err);
     }
 }
 
@@ -177,11 +192,17 @@ export const constructContacts = (name, phone, email, index) => {
     const btnContact_more = document.createElement('button');
     const imgContact = document.createElement('img');
 
+    const rgb = colorRandomizer('rgb');
+    const rgba = colorRandomizer('rgba');
+
     divContactData.classList.add('contacts-data');
+    divContactData.style.borderTop = '2px'+' '+'solid'+' '+rgba;
+    divContactData.style.borderBottom = '2px'+' '+'solid'+' '+rgba;
     container.append(divContactData);
 
     divContact_name.classList.add('contact-name');
     divContact_name.classList.add('contact-item');
+    divContact_name.style.borderLeft = '5px'+' '+'solid'+' '+rgb;
     divContact_name.textContent = name;
     divContactData.append(divContact_name);
 
@@ -197,6 +218,7 @@ export const constructContacts = (name, phone, email, index) => {
 
     divContact_more.classList.add('contact-more');
     divContact_more.classList.add('contact-item');
+    divContact_more.style.borderRight = '5px'+' '+'solid'+' '+rgb;
     divContactData.append(divContact_more);
 
     btnContact_more.classList.add('btn--display-options');

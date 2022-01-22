@@ -25,6 +25,16 @@
     src: url('../fonts/Bitter-VariableFont_wght.ttf');
 }
 
+@font-face {
+    font-family: "Lilita One";
+    src: url('../fonts/LilitaOne-Regular.ttf');
+}
+
+@font-face {
+    font-family: Montserrat;
+    src: url('../fonts/Montserrat-Regular.ttf');
+}
+
 * {
     list-style: none;
     margin: 0;
@@ -49,13 +59,12 @@ header {
 }
 
 .logo {
-    font-family: 'Bitter', sans-serif;
+    font-family: 'Lilita One', sans-serif;
     display: inline-block;
     padding: 1rem 0;
     line-height: 2rem;
-    font-size: 1.2rem;
-    font-weight: bolder;
-    background-image: linear-gradient(120deg, var( --smoth-green-color) 10%, var(--white-color) 40%, var(--dark-grey-color) 110%);
+    font-size: 1.6rem;
+    background-image: linear-gradient(120deg, rgb(231, 235, 18) 10%, rgb(0, 255, 255) 40%, rgb(0, 185, 170) 110%);
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
@@ -64,9 +73,9 @@ header {
 }
 
 .logo > img {
-    width: 20px;
+    width: 25px;
     float: left;
-    margin-top: .5rem;
+    margin-top: .2rem;
     margin-right: .5rem;
 }
 
@@ -145,7 +154,7 @@ header {
 
 /* ========= main ========== */
 main {
-    margin-top: 15vh;
+    margin-top: 18.5vh;
 }
 
 .login-modal {
@@ -320,7 +329,7 @@ footer {
     z-index: 10;
 }
 
-@media  screen and (max-width: 780px) {
+@media  screen and (max-width: 825px) {
     header {
         display: block;
     }
