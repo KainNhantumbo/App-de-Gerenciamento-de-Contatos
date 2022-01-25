@@ -358,7 +358,7 @@ export function nothingToShow () {
     const divContactData = document.createElement('div');
     const data = fetchDataFromStorage('contactsData');
 
-    if (data.length <= 0) {
+    if (data === null || data.length === 0) {
         divContactData.classList.add('contacts-data');
         divContactData.innerHTML = `Sem contatos salvos.<br>Os contatos que for a salvar aparecerão aqui!`;
         divContactData.style.width = '98%';

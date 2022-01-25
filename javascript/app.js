@@ -19,16 +19,16 @@ import { nothingToShow } from './functions.js';
 
 
 //login do usuário com os dados salvos no navegador
-const userLogin = (e) => {
+const userLogin = async (e) => {
     e.preventDefault();
     const passwordSignIn = document.getElementById('password-input-signin').value;
     const emailSignIn = document.getElementById('email-input-signin').value;
     
-    // carrega os dados salvos no localStorage
-    const $data = fetchDataFromStorage("user");
-
     // verifica se o usuário pode logar
     try {
+        // carrega os dados salvos no localStorage
+        const $data = await fetchDataFromStorage("user");
+
         if (emailSignIn === "")
         return divMsg('Por favor, escreva um e-mail válido!');
             
