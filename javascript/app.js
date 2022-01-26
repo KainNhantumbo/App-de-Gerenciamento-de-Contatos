@@ -11,7 +11,6 @@ import { addContactModal } from './modals.js';
 import { registerModal } from './modals.js';
 import { welcome } from './functions.js';
 import { deleteButton } from './functions.js';
-import { setColors } from './functions.js';
 import { log } from './functions.js';
 import { fetchDataFromStorage } from './functions.js';
 import { getContactData } from './functions.js';
@@ -48,7 +47,6 @@ function loadEvents () {
     welcome();
     rendererRefresh('contactsData');
     deleteButton();
-    setColors();
     nothingToShow()
     document.querySelectorAll('.btn-quit').forEach(item => {
         item.addEventListener('click', quitModal);

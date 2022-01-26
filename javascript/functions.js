@@ -102,7 +102,7 @@ const colorRandomizer = (pattern) => {
 }
 
 // coloca cores em elementos
-export function setColors () {
+function setColors () {
     const headerElements =  document.querySelectorAll('.contacts-header--info');
     const rgba = colorRandomizer('rgba');
     headerElements.forEach(element => {
@@ -222,8 +222,6 @@ export const constructContacts = (name, phone, email, index) => {
     const rgba = colorRandomizer('rgba');
 
     divContactData.classList.add('contacts-data');
-    divContactData.style.borderTop = '2px'+' '+'solid'+' '+rgba;
-    divContactData.style.borderBottom = '2px'+' '+'solid'+' '+rgba;
     container.append(divContactData);
 
     divContact_name.classList.add('contact-name');

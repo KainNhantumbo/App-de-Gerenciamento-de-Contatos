@@ -1,8 +1,8 @@
 :root {
-    --darker-color: #162C2D;
+    --darker-color: #483434;
     --dark-grey-color: #6B8790;
     --light-grey-color: #F5F6F7;
-    --blue-cian-color: #356C6E;
+    --blue-cian-color: #6B4F4F;
     --dark-color: #000000;
     --white-color: #fff;
     --bloody-color: #C2051B;
@@ -44,12 +44,13 @@
 
 body {
     font-family: Montserrat, sans-serif;
+    background-color: #DBD0C0;
 }
 
 header {
     display: flex;
     justify-content: space-between;
-    background: linear-gradient(115deg, var(--smoth-green-color) 18%, var(--light-yellow-color) 190%, var(--blue-cian-color) 120%);
+    background: #6B4F4F;
     position: fixed;
     top: 0;
     width: 100%;
@@ -64,10 +65,7 @@ header {
     padding: 1rem 0;
     line-height: 2rem;
     font-size: 1.6rem;
-    background-image: linear-gradient(120deg, rgb(231, 235, 18) 10%, rgb(0, 255, 255) 40%, rgb(0, 185, 170) 110%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
+    color: #EED6C4;
     letter-spacing: .1rem;
     user-select: none;
 }
@@ -316,7 +314,7 @@ footer {
 }
 
 .info-footer {
-    background-color: var(--blue-cian-color);
+    background-color: #6B4F4F;
     color: var(--white-color);
     text-align: center;
     font-size: 1rem;

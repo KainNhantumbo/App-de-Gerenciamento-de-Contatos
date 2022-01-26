@@ -1,25 +1,24 @@
 :root {
-    --darker-color: #162C2D;
+
     --darker-grey-color: rgba(0,0,0,.2);
     --dark-grey-color: #6B8790;
     --light-grey-color: #F5F6F7;
-    --blue-cian-color: #356C6E;
+    --blue-cian-color: #483434;
     --dark-color: #000000;
-    --white-color: #fff;
-    --bloody-color: #C2051B;
+
+
     --shadow-color: #d1d1d1;
-    --darker-orange-color: #D75B31;
-    --light-yellow-color: #EBED68;
+
     --smoth-green-color: #6A9080;
     --shadows-config: 0 0 2px 2px var(--shadow-color);
-    --buttons-gradient-config: linear-gradient(130deg, var(--blue-cian-color) 5%, var(--smoth-green-color) 20%, var(--light-yellow-color) 170%);
+    --buttons-gradient-config: linear-gradient(130deg, #483434 20%, #EED6C4 90%, #FFF3E4 170%);
 }
 
 /*================animetions================*/
 
 @keyframes onColorSet {
     from {
-        opacity: 0;
+        opacity: 1;
         background-color: var(--smoth-green-color);
     }
 }
@@ -27,7 +26,7 @@
 @keyframes onColorRemove {
     to {
         opacity: 1;
-        background-color: initial;
+        background-color: #DBD0C0;
     }
 }
 
@@ -102,7 +101,7 @@
 }
 
 .--dark-mode {
-    background-color: #162C2D;
+    background-color: #362222;
     animation: onColorSet 500ms ease forwards;
     opacity: 1;
 }
@@ -138,7 +137,8 @@
 .toolbar {
     display: flex;
     justify-content: space-around;
-    background-color: #d0d0d0;
+    background-color: #fff;
+    opacity: .6;
     padding: 5px; 
     margin: 0 2vw;
     border-radius: 5px;
@@ -160,6 +160,7 @@
     box-shadow: 0 0 5px 1px rgba(0, 0, 0, .2);
     outline: none;
     display: flex;
+    font-weight: 500;
     justify-content: space-evenly;
     gap: .5em;
     border-bottom: 3px solid transparent;
@@ -174,8 +175,8 @@
 }
 
 .btn--display-options:hover {
-    background: rgba(255, 255, 255, .2);
-    transition: all 400ms ease;
+    background: rgba(255, 255, 255, .5);
+    transition: all 200ms ease;
 }
 
 .btn-dark--mode:hover,
@@ -201,7 +202,7 @@
 }
 
 .app-body {
-    background-color: #d0d0d0;
+    background-color: #FFF3E4;
     margin: 0 2vw;
     padding: .5em 0;
     margin-top: 2vh;
@@ -216,7 +217,7 @@
     margin: 0 auto;
     padding: 2px;
     border-radius: 5px;
-    background: var(--smoth-green-color);
+    background: #6B4F4F;
 }
 
 .contacts-data {
@@ -231,16 +232,16 @@
 .contacts-header--info, .contact-item {
     margin: 1vh 0;
     padding: 15px 5%;
-    background: var(--darker-color);
+    background: #EED6C4;
     border-radius: 5px;
-    color: var(--white-color);
+    color: #483434;
     font-weight: 500;
     font-size: 1.1rem;
     user-select: none;
 }
 
 .contacts-header--info {
-    border-bottom: 2px solid var(--white-color);
+    border-bottom: 2px solid #fff;
 }
 
 .contact-item {
