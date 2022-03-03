@@ -133,6 +133,7 @@ export const darkMode = () => {
     const body = document.querySelector('.main-class');
     const toolbar = document.querySelector('.toolbar');
     const appBody = document.querySelector('.app-body');
+    const wellcomeMsg =document.querySelector('.welcome');
     const btnDarkmode = document.querySelector('.svg-container');
     const darkMoonRegular = `<img class="moon-svg" src="./svgs/moon-regular.svg" alt="dark mode regular">`;
     const darkMoonSolid = `<img class="moon-svg" src="./svgs/moon-solid.svg" alt="dark mode solid">`;
@@ -143,6 +144,7 @@ export const darkMode = () => {
             body.classList.add('--dark-mode');
             toolbar.classList.add('--dark-background');
             appBody.classList.add('--dark-background');
+            wellcomeMsg.classList.add('--welcome-dark_mode');
         break;
         case darkMoonSolid:
             body.classList.add('--dark-modeEnd');
@@ -151,6 +153,7 @@ export const darkMode = () => {
                 body.classList.remove('--dark-modeEnd');
                 body.classList.remove('--dark-mode');
                 toolbar.classList.remove('--dark-background');
+                wellcomeMsg.classList.remove('--welcome-dark_mode');
                 appBody.classList.remove('--dark-background');
             }, 500);
         break;

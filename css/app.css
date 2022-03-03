@@ -1,11 +1,9 @@
 :root {
     --darker-grey-color: rgba(0,0,0,.2);
-    --dark-grey-color: #6B8790;
-    --light-grey-color: #F5F6F7;
     --blue-cian-color: #483434;
     --dark-color: #000000;
     --shadow-color: #d1d1d1;
-    --smoth-green-color: #6A9080;
+    --smoth-green-color: #DBD0C0;
     --shadows-config: 0 0 2px 2px var(--shadow-color);
 }
 
@@ -21,7 +19,7 @@
 @keyframes onColorRemove {
     to {
         opacity: 1;
-        background-color: #DBD0C0;
+        background-color: var(--smoth-green-color);
     }
 }
 
@@ -64,25 +62,6 @@
     }
 }
 
-@keyframes hoverOnButtons {
-    0% {
-        transform: translateX(1.5vw);
-    }
-    25% {
-        transform: translateX(.8vw);
-    }
-    50% {
-        transform: translateX(1.5vw);
-    }
-    75% {
-        transform: translateX(.8vw);
-    }
-    100% {
-        transform: translateX(1.5vw);
-    }
-
-}
-
 .--options-open {
     animation: onOpenOptions 200ms ease-out forwards;
 }
@@ -119,20 +98,24 @@
     width: 100%;
     text-transform: uppercase;
     font-size: .9rem;
+    font-weight: 600;
     text-align: center;
-    color: var(--white-color);
+    color: var(--blue-cian-color);
     line-height: 2rem;
-    background-color: var(--smoth-green-color);
     z-index: 9;
     position: fixed;
     top: 12vh;
     user-select: none;
 }
+.--welcome-dark_mode {
+    color: var(--white-color);
+    opacity: .7;
+}
 
 .toolbar {
     display: flex;
     justify-content: space-around;
-    max-width: 600px;
+    max-width: 700px;
     background-color: #fff;
     opacity: .6;
     padding: 5px; 
@@ -171,7 +154,7 @@
 
 .btn--display-options:hover {
     background: rgba(255, 255, 255, .5);
-    transition: all 200ms ease;
+    transition: 200ms ease;
 }
 
 .btn-dark--mode:hover,
@@ -185,7 +168,6 @@
     margin-top: .2em;
     width: 20px;
 }
-
 .more-svg {
     width: 25px;
 }
@@ -199,9 +181,9 @@
 
 .app-body {
     background-color: #FFF3E4;
-    max-width: 600px;
+    max-width: 700px;
     margin: 0 auto;
-    padding: .5em 0;
+    padding: .5em ;
     margin-top: 2vh;
     border-radius: 5px;
 }
@@ -209,10 +191,8 @@
 .contacts-header, .contacts-data {
     display: flex;
     justify-content: space-evenly;
-    flex-flow: row nowrap;
-   
-    margin: 0 auto;
-    padding: 2px;
+    flex-flow: row nowrap;  
+    margin: 0 auto; 
     border-radius: 5px;
     background: #6B4F4F;
 }
@@ -254,12 +234,10 @@
 
 .contact-more {
     border-radius: 0 5px 5px 0;
-    /* border-right: 2px solid var(--white-color); */
 }
 
 .contact-name {
     border-radius: 5px 0 0 5px;
-    /* border-left: 2px solid var(--white-color); */
 }
 
 .--dark-background {
@@ -283,31 +261,3 @@
     justify-content: flex-start;
     flex-direction: column;
 }
-
-.btn-details, .btn-delete {
-    width: 100%;
-    padding: 0 5px;
-    position: relative;
-    border-style: none;
-    line-height: 2rem;
-    text-align: left;
-    background-color: var(--dark-grey-color);
-    color: var(--white-color);
-}
-
-.btn-details:hover, .btn-delete:hover {
-    background-color: var(--dark-color);
-}
-
-.btn-details:active, .btn-delete:active {
-    outline: none;
-}
-
-.btn-delete {
-    border-radius: 0 0 5px 5px;
-}
-
-.btn-details {
-    border-radius: 5px 5px 0 0;
-}
-
