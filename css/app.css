@@ -1,17 +1,12 @@
 :root {
-
     --darker-grey-color: rgba(0,0,0,.2);
     --dark-grey-color: #6B8790;
     --light-grey-color: #F5F6F7;
     --blue-cian-color: #483434;
     --dark-color: #000000;
-
-
     --shadow-color: #d1d1d1;
-
     --smoth-green-color: #6A9080;
     --shadows-config: 0 0 2px 2px var(--shadow-color);
-    --buttons-gradient-config: linear-gradient(130deg, #483434 20%, #EED6C4 90%, #FFF3E4 170%);
 }
 
 /*================animetions================*/
@@ -137,26 +132,26 @@
 .toolbar {
     display: flex;
     justify-content: space-around;
+    max-width: 600px;
     background-color: #fff;
     opacity: .6;
     padding: 5px; 
-    margin: 0 2vw;
+    margin: 0 auto;
     border-radius: 5px;
     margin-top: 5vh;
 }
 
-
 .description{
-    font-weight: 500;
+    font-weight: 600;
     color: var(--white-color);
-    margin-top: .2rem;
+    margin-top: .4rem;
 }
 
 .btn-dark--mode, .btn-new--contact, .btn--display-options {
     padding: 8px;
     border-style: none;
     border-radius: 5px;
-    background: var(--buttons-gradient-config);
+    background: var(--blue-cian-color);
     box-shadow: 0 0 5px 1px rgba(0, 0, 0, .2);
     outline: none;
     display: flex;
@@ -181,12 +176,13 @@
 
 .btn-dark--mode:hover,
 .btn-new--contact:hover {
-    background: var(--dark-grey-color);
-    transition: all 700ms ease;
+    background: #000;
+    transition: all 300ms ease;
     border-bottom: 3px solid var(--white-color);
 }
 
 .moon-svg, .plus-svg {
+    margin-top: .2em;
     width: 20px;
 }
 
@@ -203,7 +199,8 @@
 
 .app-body {
     background-color: #FFF3E4;
-    margin: 0 2vw;
+    max-width: 600px;
+    margin: 0 auto;
     padding: .5em 0;
     margin-top: 2vh;
     border-radius: 5px;
@@ -213,7 +210,7 @@
     display: flex;
     justify-content: space-evenly;
     flex-flow: row nowrap;
-    width: 94vw;
+   
     margin: 0 auto;
     padding: 2px;
     border-radius: 5px;
